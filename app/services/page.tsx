@@ -15,11 +15,12 @@ import {
 } from "lucide-react";
 import { services } from "@/data/services";
 import CTASection from "@/components/home/CTASection";
+import ApprovalExpertiseSection from "@/components/home/ApprovalExpertiseSection";
 
 export const metadata: Metadata = {
-  title: "Building Certification Services — NSW",
+  title: "Approval, Certification & Compliance Services — NSW",
   description:
-    "All NSW building certification services: CDC, Construction Certificate, Occupation Certificate, Principal Certifier, BCA/NCC Compliance, DA Support, Demolition, Swimming Pool, Building Inspections, Fire Safety.",
+    "NSW approval, certification and compliance services: CDC, Construction Certificate, Occupation Certificate, Principal Certifier, BCA & NCC Compliance, Development & Approval Support, approval package reviews, NSW Planning Portal assistance, Demolition, Swimming Pool, Building Inspections, Fire Safety & AFSS.",
   alternates: { canonical: "https://certifyright.com.au/services" },
 };
 
@@ -61,11 +62,11 @@ export default function ServicesPage() {
               <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">Services</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              Building Certification Services
+              Approval, Certification & Compliance Services
             </h1>
             <p className="text-blue-100 text-xl leading-relaxed max-w-2xl">
-              From Complying Development Certificates to fire safety compliance — Certify Right
-              handles every stage of the NSW building certification process.
+              From early planning advice and approval package reviews through to certification
+              and final occupation — practical support at every stage across NSW.
             </p>
           </div>
         </div>
@@ -109,7 +110,7 @@ export default function ServicesPage() {
           )}
 
           {/* All services grid */}
-          <h2 className="text-xl font-bold text-[#0C2D5A] mb-6">All Certification Services</h2>
+          <h2 className="text-xl font-bold text-[#0C2D5A] mb-6">All Services</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map((service) => {
               const Icon = iconMap[service.icon] || FileText;
@@ -138,6 +139,8 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      <ApprovalExpertiseSection />
 
       <CTASection />
     </>

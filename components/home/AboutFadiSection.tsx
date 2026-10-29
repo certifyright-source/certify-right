@@ -3,12 +3,12 @@ import Link from "next/link";
 import { ArrowRight, Award } from "lucide-react";
 
 const expertise = [
-  { label: "Civil Engineering", desc: "Bachelor of Civil Engineering — structural and technical foundation." },
+  { label: "Civil/Design Engineering", desc: "Bachelor of Civil Engineering — structural and design knowledge." },
   { label: "Building Surveying", desc: "Registered Building Surveyor Class A3 (BDC2868) — NSW Fair Trading." },
-  { label: "Building Design", desc: "Qualified building design professional with hands-on project experience." },
+  { label: "NSW Planning Portal", desc: "Daily work with CDC and DA lodgements, requests and referrals." },
   { label: "Council Compliance", desc: "Former council compliance officer — knows the process from both sides." },
-  { label: "Fire Safety", desc: "Qualified fire safety officer — Annual Fire Safety Statements and assessments." },
-  { label: "Private Certification", desc: "15+ years as a private certifier across residential and commercial projects." },
+  { label: "Fire Safety", desc: "Qualified fire safety professional — AFSS, schedules and assessments." },
+  { label: "Private Certification", desc: "15+ years of industry experience across residential and commercial projects." },
 ];
 
 const credentials = [
@@ -33,20 +33,17 @@ export default function AboutFadiSection() {
               </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-[#0C2D5A] mb-4 leading-tight">
-              More Than Certification. Real Building Expertise.
+              One Certifier. Multiple Perspectives.
             </h2>
             <div className="space-y-4 text-slate-600 leading-relaxed mb-8">
               <p>
-                Fadi Habbouche is not just a certifier — he is a Civil Engineer, Registered
-                Building Surveyor, former council compliance officer, building design professional,
-                and qualified fire safety officer. That range of experience means he understands
-                your project from multiple angles.
+                Fadi Habbouche is a Registered Building Surveyor (Class A3), Civil/Design
+                Engineer, former Council Compliance Officer and qualified Fire Safety
+                Professional.
               </p>
               <p>
-                With over 15 years of experience, Fadi combines technical knowledge with
-                practical, on-the-ground building expertise. He communicates in plain English,
-                responds promptly, and focuses on moving your project forward rather than
-                creating unnecessary hurdles.
+                With 15+ years of industry experience, Fadi gives practical, plain-English
+                advice, responds promptly and focuses on moving your project forward.
               </p>
             </div>
 

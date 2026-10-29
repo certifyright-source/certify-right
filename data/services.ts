@@ -52,7 +52,7 @@ Fadi Habbouche is a NSW Fair Trading Registered Building Surveyor (Class A3, BDC
       "Construction can commence — with inspections scheduled as required",
     ],
     icon: "FileCheck",
-    banner: "/images/services/cdc.png",
+    banner: "/images/services/cdc.webp",
     featured: true,
   },
   {
@@ -90,7 +90,7 @@ We assess your documentation, identify any issues early, and work with you to re
       "Inspections are scheduled at critical stages during construction",
     ],
     icon: "HardHat",
-    banner: "/images/services/construction-certificate.png",
+    banner: "/images/services/construction-certificate.webp",
   },
   {
     id: "occupation-certificate",
@@ -127,7 +127,7 @@ At Certify Right, we manage the inspection process from start to finish and work
       "You have legal authority to occupy your building",
     ],
     icon: "CheckCircle2",
-    banner: "/images/services/occupation-certificate.png",
+    banner: "/images/services/occupation-certificate.webp",
   },
   {
     id: "principal-certifier-appointment",
@@ -164,81 +164,83 @@ We handle the documentation, inspection scheduling, compliance monitoring, and f
       "Final inspection completed and Occupation Certificate issued",
     ],
     icon: "ClipboardCheck",
-    banner: "/images/services/principal-certifier.png",
+    banner: "/images/services/principal-certifier.webp",
   },
   {
     id: "bca-ncc-compliance",
     slug: "bca-ncc-compliance",
-    title: "BCA / NCC Compliance Advice",
-    shortTitle: "BCA / NCC Compliance",
-    tagline: "Plain-English compliance advice — so your design gets approved the first time.",
+    title: "BCA & NCC Compliance",
+    shortTitle: "BCA & NCC Compliance",
+    tagline: "Practical compliance advice from the earliest stages of design — fewer redesigns and delays.",
     description:
-      "Building Code of Australia and National Construction Code compliance advice for designers, architects, and builders. Get plain-English guidance on compliance requirements before you lodge — so your design gets approved the first time.",
-    longDescription: `The Building Code of Australia (BCA) and National Construction Code (NCC) set the minimum standards for the design, construction, and performance of buildings across Australia. For most projects, demonstrating compliance is not optional — it is a legal requirement.
+      "Building Code of Australia (BCA) and National Construction Code (NCC) compliance reviews and advice from the earliest stages of design — identifying issues before submission to reduce costly redesigns and approval delays.",
+    longDescription: `We provide practical Building Code of Australia (BCA) and National Construction Code (NCC) compliance advice from the earliest stages of design.
 
-Getting BCA/NCC compliance wrong at the design stage leads to delays, costly redesigns, and frustration. At Certify Right, we provide clear, practical compliance advice that helps designers, architects, and builders understand the requirements and get their designs right before lodgement.
+Our assessments identify potential compliance issues before submission — reducing costly redesigns and approval delays.
 
-With Fadi's background in civil engineering and building surveying — including experience as a building design professional and council compliance officer — you get advice grounded in real-world building experience, not just code reading.`,
+We work closely with designers and consultants to find practical compliance outcomes.`,
     features: [
-      "Plain-English BCA/NCC compliance review of design documents",
-      "Advice on deemed-to-satisfy and performance solution pathways",
-      "Early identification of compliance issues before lodgement",
-      "Guidance on fire safety, structural, accessibility and energy requirements",
-      "Support for residential, commercial and mixed-use projects",
-      "Experience as a qualified civil engineer and building design professional",
+      "BCA compliance reviews",
+      "NCC assessments",
+      "Alternative solution coordination",
+      "Design compliance advice",
+      "Performance requirement guidance",
+      "Building regulation interpretation",
     ],
     whoIsItFor: [
       "Architects and designers checking compliance before lodgement",
       "Builders seeking clarification on BCA/NCC requirements",
-      "Developers assessing new project feasibility",
-      "Anyone needing expert compliance guidance on their design",
+      "Developers and consultants at the early design stage",
+      "Anyone needing practical compliance guidance on their design",
     ],
     process: [
       "Submit your design documents and project details",
-      "We review the design against relevant BCA/NCC provisions",
-      "Compliance issues and recommended solutions are identified",
-      "Written advice provided in clear, plain English",
-      "Ongoing support through design refinement as needed",
+      "We review the design against the relevant BCA/NCC provisions",
+      "Compliance issues and practical solutions are identified",
+      "Clear written advice is provided",
+      "We work with your designers and consultants as the design is refined",
     ],
     icon: "BookOpen",
-    banner: "/images/services/bca-ncc.png",
+    banner: "/images/services/bca-ncc.webp",
   },
   {
     id: "da-support",
     slug: "da-support",
-    title: "DA Support",
-    shortTitle: "DA Support",
-    tagline: "Early compliance review before you lodge with council — fewer delays, stronger application.",
+    title: "Development & Approval Support",
+    shortTitle: "Development & Approvals",
+    tagline: "Practical direction early — understand what is achievable before you invest time and money.",
     description:
-      "Pre-lodgement compliance review for Development Applications. Identify issues before you submit to council and strengthen your DA with an independent expert review.",
-    longDescription: `A Development Application (DA) is required for projects that do not qualify for Complying Development. Lodging a DA without a thorough pre-lodgement review is a common source of delays, requests for additional information, and objections that could have been avoided.
+      "Preliminary planning advice, approval pathway reviews, CDC vs DA guidance and pre-lodgement support — so you understand what is achievable before investing significant time and money.",
+    longDescription: `Not every project starts with a building approval. Many clients need guidance before engaging architects or consultants.
 
-Certify Right provides pre-lodgement DA support — an independent expert review of your design and documentation before you submit to council. We identify compliance gaps, assess whether conditions are likely to be triggered, and help you put your best foot forward.
+We provide practical direction early — helping you understand what is achievable on your site, which approval pathway suits your project, and what is needed before lodgement.
 
-With experience across council compliance, building surveying, and building design, Fadi provides practical advice that translates directly into a stronger application and a smoother council process.`,
+Our goal is to help you avoid wasted time and money, and submit a stronger application the first time.`,
     features: [
-      "Pre-lodgement review of DA documentation for compliance gaps",
-      "Assessment against relevant planning controls and development standards",
-      "Identification of issues likely to trigger council conditions or objections",
-      "Practical recommendations to strengthen your application",
-      "Advice on SEPPs, local environmental plans (LEPs) and DCPs",
-      "Support for residential, dual occupancy, and mixed-use DAs",
+      "Preliminary planning advice",
+      "Approval pathway reviews",
+      "Development feasibility assessments",
+      "CDC versus DA guidance",
+      "Site constraints reviews",
+      "Pre-lodgement advice",
+      "Statement of Environmental Effects (SEE) preparation assistance",
+      "General approval strategy advice",
     ],
     whoIsItFor: [
-      "Property owners lodging residential DAs",
-      "Architects and designers preparing council submissions",
-      "Builders and developers assessing compliance before lodgement",
-      "Anyone wanting expert eyes on their DA before it goes to council",
+      "Homeowners considering buying, designing or developing a property",
+      "Architects and designers preparing submissions",
+      "Builders and developers assessing feasibility before lodgement",
+      "Anyone unsure which approval pathway applies to their project",
     ],
     process: [
-      "Submit your design documents and relevant site information",
-      "We review the proposal against planning controls and standards",
-      "Compliance issues and recommended improvements are identified",
-      "We provide a clear written review with practical recommendations",
-      "You refine your application and lodge with greater confidence",
+      "Tell us about your site and what you are planning",
+      "We review site constraints and the available approval pathways",
+      "We advise on feasibility and the best route — CDC or DA",
+      "We outline the documentation needed before lodgement",
+      "You proceed with clear direction and fewer surprises",
     ],
     icon: "FileText",
-    banner: "/images/services/da-support.png",
+    banner: "/images/services/da-support.webp",
   },
   {
     id: "demolition-certificate",
@@ -275,7 +277,7 @@ We also coordinate with the relevant authorities and ensure any asbestos managem
       "Demolition can proceed; subsequent construction certification arranged",
     ],
     icon: "Building2",
-    banner: "/images/services/demolition.png",
+    banner: "/images/services/demolition.webp",
   },
   {
     id: "swimming-pool-compliance",
@@ -312,7 +314,7 @@ The process is straightforward: we inspect the pool barrier, assess compliance w
       "Re-inspection arranged once rectifications are complete",
     ],
     icon: "Waves",
-    banner: "/images/services/swimming-pool.png",
+    banner: "/images/services/swimming-pool.webp",
   },
   {
     id: "building-inspections",
@@ -349,28 +351,28 @@ Fadi's background as a civil engineer means he understands construction from the
       "Follow-up inspections arranged as needed",
     ],
     icon: "Search",
-    banner: "/images/services/building-inspections.png",
+    banner: "/images/services/building-inspections.webp",
   },
   {
     id: "fire-safety",
     slug: "fire-safety",
-    title: "Fire Safety",
-    shortTitle: "Fire Safety",
-    tagline: "Annual Fire Safety Statements and fire safety compliance for NSW buildings.",
+    title: "Fire Safety & AFSS Support",
+    shortTitle: "Fire Safety & AFSS",
+    tagline: "Annual Fire Safety Statements, fire safety schedules and compliance support for NSW buildings.",
     description:
-      "Fire safety assessments, Annual Fire Safety Statements, and compliance advice for NSW buildings. Fadi's experience as a fire safety officer means you get practical, reliable fire safety support.",
-    longDescription: `Fire safety compliance is a critical and often misunderstood area of building regulation in NSW. Building owners are required to maintain fire safety measures, ensure annual inspections by accredited practitioners, and lodge Annual Fire Safety Statements with council.
+      "Annual Fire Safety Statements (AFSS), Fire Safety Schedules, essential fire safety measures and compliance advice for NSW building owners and property managers.",
+    longDescription: `Fire safety requirements can be complex for building owners and property managers.
 
-Certify Right provides fire safety compliance support drawing on Fadi's experience as a qualified fire safety officer. We assess fire safety measures, identify deficiencies, and provide clear advice on what needs to be done to achieve and maintain compliance.
+As a qualified Fire Safety Professional, Fadi understands both the technical and regulatory requirements for maintaining compliant buildings.
 
-Whether you need an Annual Fire Safety Statement, a fire safety upgrade assessment, or advice on fire safety requirements for a new project, we provide practical support grounded in hands-on building and compliance experience.`,
+We assess fire safety measures, identify deficiencies, and give clear advice on what is needed to achieve and maintain compliance.`,
     features: [
-      "Annual Fire Safety Statement support and coordination",
-      "Assessment of essential fire safety measures",
-      "Fire safety upgrade assessments for existing buildings",
-      "Advice on fire safety requirements under BCA/NCC",
-      "Experience as a qualified fire safety officer",
-      "Support for residential, commercial and strata buildings",
+      "Annual Fire Safety Statements (AFSS)",
+      "Fire Safety Schedules",
+      "Essential Fire Safety Measures",
+      "Fire safety compliance reviews",
+      "Existing building assessments",
+      "Regulatory compliance advice",
     ],
     whoIsItFor: [
       "Building owners with annual fire safety obligations",
@@ -386,7 +388,7 @@ Whether you need an Annual Fire Safety Statement, a fire safety upgrade assessme
       "Ongoing advice available as required",
     ],
     icon: "Flame",
-    banner: "/images/services/fire-safety.png",
+    banner: "/images/services/fire-safety.webp",
   },
 ];
 

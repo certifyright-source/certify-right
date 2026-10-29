@@ -42,12 +42,12 @@ export default function ServiceAreasPage() {
         {/* Background photo — Fadi with Sydney skyline */}
         <div className="absolute inset-0" aria-hidden="true">
           <Image
-            src="/images/hero-2.png"
+            src="/images/hero-2.webp"
             alt=""
             fill
             className="object-cover"
             style={{ objectPosition: "60% center" }}
-            priority
+            preload
             sizes="100vw"
           />
           {/* Left-to-right gradient: dark behind text, clears on right so Fadi is visible */}

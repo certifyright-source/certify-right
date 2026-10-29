@@ -37,7 +37,7 @@ export default function Footer() {
           {/* Column 1: Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="mb-5 block">
-              <CRLogo variant="white" />
+              <CRLogo variant="white" preload={false} />
             </Link>
             <p className="text-blue-100 text-sm leading-relaxed mb-6">
               NSW Building Certification — Fast, Clear, Responsive and Done Right.

@@ -2,12 +2,15 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const trustPoints = [
-  "NSW Fair Trading Registered Building Surveyor",
-  "15+ years across civil engineering and building surveying",
-  "Class A3 certification (BDC2868)",
-  "AIBS and AAC member",
-  "Plain-English communication — no jargon",
-  "24-hour quote turnaround",
+  "Registered Building Surveyor (Class A3)",
+  "Civil/Design Engineer",
+  "Council Compliance Officer",
+  "Qualified Fire Safety Professional",
+  "15+ years of industry experience",
+  "NSW Planning Portal expertise",
+  "Practical, solution-focused advice",
+  "Direct access to your certifier",
+  "Fast turnaround times",
 ];
 
 export default function AboutSection() {
@@ -22,6 +25,21 @@ export default function AboutSection() {
               <span className="text-[#185FA5] text-xs font-semibold tracking-widest uppercase">
                 About Certify Right
               </span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#0C2D5A] mb-4 leading-tight">
+              More Than Certification. Real Approval Expertise.
+            </h2>
+            <div className="space-y-4 text-slate-600 leading-relaxed mb-8">
+              <p>
+                We do more than issue certificates. We help homeowners, builders, architects,
+                developers and consultants navigate planning, certification, compliance and
+                approval pathways across NSW.
+              </p>
+              <p>
+                Whether you need a CDC, Construction Certificate, Occupation Certificate,
+                BCA/building compliance advice, or guidance before buying or designing a
+                property — we give clear, practical advice that keeps your project moving.
+              </p>
             </div>
             {/* Video — replace src with the Certify Right company video when available */}
             <div className="relative w-full rounded-xl overflow-hidden shadow-lg aspect-video bg-[#0C2D5A] mb-8">
@@ -50,8 +68,8 @@ export default function AboutSection() {
           {/* Right */}
           <div className="space-y-4">
             <div className="bg-[#F8FAFC] rounded-2xl p-7 border border-slate-100">
-              <h3 className="text-[#0C2D5A] font-bold text-base mb-4">Why Certify Right</h3>
-              <ul className="space-y-3">
+              <h3 className="text-[#0C2D5A] font-bold text-base mb-4">Why Clients Choose Certify Right</h3>
+              <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
                 {trustPoints.map((point) => (
                   <li key={point} className="flex items-start gap-3">
                     <CheckCircle2 className="w-4.5 h-4.5 text-[#185FA5] flex-shrink-0 mt-0.5" />
@@ -59,6 +77,10 @@ export default function AboutSection() {
                   </li>
                 ))}
               </ul>
+              <p className="text-slate-600 text-sm leading-relaxed mt-5 pt-5 border-t border-slate-200">
+                We understand projects from multiple perspectives — so we identify issues early
+                and provide practical pathways forward.
+              </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-[#0C2D5A] rounded-2xl p-6 text-white text-center">
@@ -67,7 +89,7 @@ export default function AboutSection() {
               </div>
               <div className="bg-[#185FA5] rounded-2xl p-6 text-white text-center">
                 <div className="text-4xl font-bold mb-1">10</div>
-                <div className="text-blue-100 text-xs font-medium">Certification Services</div>
+                <div className="text-blue-100 text-xs font-medium">Core Services</div>
               </div>
             </div>
           </div>

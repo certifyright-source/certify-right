@@ -12,7 +12,7 @@ const steps = [
     number: "02",
     title: "We Review Your Requirements",
     description:
-      "We assess your project, identify the appropriate certification pathway (CDC, CC, or PCA), and provide a clear quote. No jargon, no surprises.",
+      "We confirm the right approval pathway (CDC or DA/CC), review your documentation for gaps, and provide a clear quote. No jargon, no surprises.",
   },
   {
     number: "03",
