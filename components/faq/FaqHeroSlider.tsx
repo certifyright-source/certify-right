@@ -90,7 +90,7 @@ export default function FaqHeroSlider() {
             fill
             className="object-cover"
             style={{ objectPosition: slide.objectPos }}
-            priority={current === 0}
+            preload={current === 0}
             sizes="100vw"
           />
           <div

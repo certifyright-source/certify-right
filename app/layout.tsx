@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Certify Right",
   },
   description:
-    "NSW Building Certification — Fast, Clear, Responsive and Done Right. Certify Right is operated by Fadi Habbouche, Registered Building Surveyor Class A3 (BDC2868). CDC, Construction Certificates, Occupation Certificates and more across Greater Sydney and NSW.",
+    "More than a certifier — your approval and compliance partner across NSW. Certify Right is operated by Fadi Habbouche, Registered Building Surveyor Class A3 (BDC2868). Planning advice, approval package reviews, CDC, Construction and Occupation Certificates, BCA/NCC compliance and fire safety.",
   keywords: [
     "NSW building certification",
     "Complying Development Certificate",

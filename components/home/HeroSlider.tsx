@@ -29,35 +29,35 @@ interface SlideData {
 const SLIDES: SlideData[] = [
   {
     id: 0,
-    chip: "Complying Development Certificate",
-    headline: "Skip Council.",
-    accent: "Get Your CDC Faster.",
-    body: "A CDC is the fastest path to building approval for eligible residential projects — no DA, no council queue. We assess your project against SEPP codes and give you a straight answer upfront.",
-    cta1: { label: "Learn About CDC", href: "/services/complying-development-certificate" },
-    cta2: { label: "Call Fadi", href: "tel:0423925514", phone: true },
-    bg: "/images/hero-2.png",
-    objectPos: "60% center",
-  },
-  {
-    id: 1,
-    chip: "NSW Building Certification",
-    headline: "Fast. Clear. Responsive.",
-    accent: "Done Right.",
-    body: "Fadi Habbouche is a NSW Registered Building Surveyor (Class A3 · BDC2868) and Civil Engineer with 15+ years experience — handling your certification from start to finish.",
+    chip: "NSW Approvals, Certification & Compliance",
+    headline: "More Than a Certifier.",
+    accent: "Your Approval & Compliance Partner.",
+    body: "We help homeowners, builders, architects and developers navigate planning, certification, fire safety and compliance across NSW — from early advice through to final occupation.",
     cta1: { label: "Get a Quote Within 24 Hours", href: "/contact" },
     cta2: { label: "0423 925 514", href: "tel:0423925514", phone: true },
     bg: "/images/hero-new.webp",
     objectPos: "65% center",
   },
   {
+    id: 1,
+    chip: "Complying Development Certificate",
+    headline: "Skip Council.",
+    accent: "Get Your CDC Faster.",
+    body: "A CDC is the fastest approval pathway for eligible residential projects. We assess your project against the SEPP codes and give you a straight answer upfront.",
+    cta1: { label: "Learn About CDC", href: "/services/complying-development-certificate" },
+    cta2: { label: "Call Fadi", href: "tel:0423925514", phone: true },
+    bg: "/images/hero-2.webp",
+    objectPos: "60% center",
+  },
+  {
     id: 2,
-    chip: "NSW-Wide Coverage",
-    headline: "Certification You Can",
-    accent: "Actually Rely On.",
-    body: "From Greater Sydney to regional NSW — Certify Right manages every stage of your building certification with clear communication, thorough inspections, and no surprises.",
+    chip: "From Concept to Completion",
+    headline: "Clear Advice.",
+    accent: "A Clear Path Forward.",
+    body: "From planning advice and approval package reviews through to certification and final occupation — practical guidance, responsive communication and direct access to your certifier.",
     cta1: { label: "Our Services", href: "/services" },
     cta2: { label: "Service Areas", href: "/service-areas" },
-    bg: "/images/hero-3.png",
+    bg: "/images/hero-3.webp",
     objectPos: "65% top",
   },
 ];
@@ -135,7 +135,7 @@ export default function HeroSlider() {
             fill
             className="object-cover"
             style={{ objectPosition: slide.objectPos }}
-            priority={current === 0}
+            preload={current === 0}
             sizes="100vw"
           />
           {/* Left-to-right gradient: solid on left for text, clears on right so face is visible */}

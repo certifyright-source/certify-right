@@ -32,7 +32,7 @@ export default function ServicesSection() {
               </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-[#0C2D5A] leading-tight">
-              Building Certification Services
+              Approval, Certification & Compliance Services
             </h2>
           </div>
           <Link

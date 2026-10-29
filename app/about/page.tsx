@@ -12,34 +12,34 @@ import CTASection from "@/components/home/CTASection";
 export const metadata: Metadata = {
   title: "About Fadi Habbouche — NSW Registered Building Surveyor",
   description:
-    "Fadi Habbouche is a Civil Engineer, Registered Building Surveyor (Class A3, BDC2868), and the director of Certify Right. 15+ years across building surveying, council compliance, fire safety, and building design.",
+    "Fadi Habbouche is a Registered Building Surveyor (Class A3, BDC2868), Civil/Design Engineer, former Council Compliance Officer and qualified Fire Safety Professional — helping clients navigate planning, certification, compliance and approvals across NSW.",
   alternates: { canonical: "https://certifyright.com.au/about" },
 };
 
 const expertise = [
   {
-    label: "Civil Engineering",
-    desc: "Bachelor of Civil Engineering. Structural, geotechnical, and technical building knowledge that informs every assessment.",
+    label: "Civil/Design Engineering",
+    desc: "Bachelor of Civil Engineering. Structural and design knowledge that informs every assessment.",
   },
   {
     label: "Building Surveying",
-    desc: "NSW Fair Trading Registered Building Surveyor, Class A3 (BDC2868). Authorised to issue CDCs, Construction Certificates, and Occupation Certificates.",
-  },
-  {
-    label: "Building Design",
-    desc: "Qualified building design professional with hands-on experience across residential and commercial project design.",
+    desc: "NSW Fair Trading Registered Building Surveyor, Class A3 (BDC2868). Authorised to issue CDCs, Construction Certificates and Occupation Certificates.",
   },
   {
     label: "Council Compliance",
-    desc: "Former council compliance officer. Fadi understands how council assesses development from the inside — giving clients a genuine advantage.",
+    desc: "Former Council Compliance Officer — understands how council assesses development from the inside.",
   },
   {
     label: "Fire Safety",
-    desc: "Qualified fire safety officer. Annual Fire Safety Statements, essential fire safety measures, and compliance assessments.",
+    desc: "Qualified Fire Safety Professional. AFSS, Fire Safety Schedules, essential fire safety measures and compliance reviews.",
   },
   {
-    label: "Private Certification",
-    desc: "15+ years as a private certifier, Principal Certifier, and building inspector across Greater Sydney and NSW.",
+    label: "NSW Planning Portal",
+    desc: "Works with the Planning Portal every day — lodgements, information requests, referrals and approval sequencing.",
+  },
+  {
+    label: "Approvals & Certification",
+    desc: "15+ years of industry experience — from early planning advice and package reviews to final occupation.",
   },
 ];
 
@@ -69,12 +69,12 @@ export default function AboutPage() {
         {/* Background: Fadi seated at desk */}
         <div className="absolute inset-0" aria-hidden="true">
           <Image
-            src="/images/about-seated.png"
+            src="/images/about-seated.webp"
             alt=""
             fill
             className="object-cover"
             style={{ objectPosition: "60% center" }}
-            priority
+            preload
             sizes="100vw"
           />
           {/* Left-to-right gradient: dark behind text, clears on right so Fadi remains visible */}
@@ -98,9 +98,9 @@ export default function AboutPage() {
                 Fadi Habbouche
               </h1>
               <p className="text-blue-100 text-xl leading-relaxed">
-                Civil Engineer. Registered Building Surveyor. Council Compliance Officer.
-                Fire Safety Officer. 15+ years of building expertise — and the person you
-                speak to directly.
+                Registered Building Surveyor (Class A3). Civil/Design Engineer. Council
+                Compliance Officer. Fire Safety Professional. 15+ years of experience — and
+                the person you speak to directly.
               </p>
             </div>
           </div>
@@ -120,30 +120,26 @@ export default function AboutPage() {
                 Director, Certify Right
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold text-[#0C2D5A] mb-6 leading-tight">
-                More Than a Certifier. A Real Building Expert.
+                More Than a Certifier. Your Approval & Compliance Partner.
               </h2>
               <div className="space-y-4 text-slate-600 leading-relaxed">
                 <p>
-                  Fadi Habbouche founded Certify Right to provide NSW homeowners, builders,
-                  developers, and granny flat companies with a better certification experience —
-                  one built on real expertise, clear communication, and genuine responsiveness.
+                  Fadi Habbouche founded Certify Right to help homeowners, builders, architects,
+                  developers and consultants navigate planning, certification, compliance and
+                  approvals across NSW — from concept through to completion.
                 </p>
                 <p>
-                  Unlike certifiers who came only through the surveying pathway, Fadi brings a
-                  broader depth of building knowledge. He holds a Bachelor of Civil Engineering,
-                  is a qualified building design professional, served as a council compliance
-                  officer, and is a qualified fire safety officer — in addition to holding Class A3
-                  registration as a NSW Building Surveyor.
+                  Fadi is a Registered Building Surveyor (Class A3), Civil/Design Engineer,
+                  former Council Compliance Officer and qualified Fire Safety Professional, with
+                  15+ years of industry experience.
                 </p>
                 <p>
-                  That combination means Fadi understands your project from multiple angles:
-                  the structural, the design, the compliance, and the process. He gives straight
-                  answers, identifies issues early, and works to keep your project on track.
+                  That range means Fadi sees your project from multiple perspectives — identifying
+                  issues early and providing practical pathways forward.
                 </p>
                 <p>
-                  When you contact Certify Right, you speak directly with Fadi. There is no
-                  junior staff member in the middle, no automated holding queue. You get the
-                  person with 15+ years of experience engaged with your project from the outset.
+                  When you contact Certify Right, you speak directly with your certifier — no
+                  middle layer, no holding queue.
                 </p>
               </div>
             </div>
@@ -246,16 +242,24 @@ export default function AboutPage() {
               <div>
                 <div className="space-y-4 text-slate-600 leading-relaxed">
                   <p>
-                    There are many private certifiers in NSW. What distinguishes Certify Right is
-                    the combination of Fadi&apos;s qualifications across multiple disciplines, his
-                    direct involvement in every project, and his commitment to responsive,
-                    plain-English communication.
+                    We don&apos;t just issue certificates — we help you navigate the entire
+                    approval process, from early advice through to final occupation.
                   </p>
-                  <p>
-                    Certification delays are almost always caused by one of three things: waiting
-                    for information, unclear communication, or slow responses. We address all three.
-                    You know where your project stands at every stage.
-                  </p>
+                  <ul className="space-y-2.5">
+                    {[
+                      "Approval package reviews before lodgement",
+                      "NSW Planning Portal expertise — CDC and DA pathways",
+                      "BCA & NCC compliance advice from early design",
+                      "Fire safety and AFSS support",
+                      "Connections to trusted architects, planners, engineers and specialists — while remaining independent as your certifier",
+                      "Practical advice, direct access to your certifier and fast turnaround times",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#185FA5] flex-shrink-0 mt-1" />
+                        <span className="text-slate-700 text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <Link
                   href="/contact"
@@ -269,7 +273,7 @@ export default function AboutPage() {
                 {[
                   { stat: "15+", label: "Years Experience" },
                   { stat: "A3", label: "Registration Class" },
-                  { stat: "10", label: "Certification Services" },
+                  { stat: "10", label: "Core Services" },
                   { stat: "NSW", label: "Wide Coverage" },
                 ].map((item) => (
                   <div key={item.label} className="bg-[#0C2D5A] rounded-2xl p-6 text-white text-center">

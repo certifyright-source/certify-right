@@ -47,7 +47,7 @@ export const faqs: FAQ[] = [
     category: "General",
     question: "What is a Fire Safety Certificate?",
     answer:
-      "A Fire Safety Certificate is a document confirming that all essential fire safety measures in a building comply with the relevant standards. It is typically required as part of the Occupation Certificate process for certain classes of buildings, and must be lodged with council. Building owners of applicable buildings also have ongoing obligations to maintain fire safety measures and lodge Annual Fire Safety Statements each year. Certify Right can assist with fire safety assessments and compliance.",
+      "A Fire Safety Certificate is a document confirming that all essential fire safety measures in a building comply with the relevant standards. It is typically required as part of the Occupation Certificate process for certain classes of buildings, and must be lodged with council. Building owners of applicable buildings also have ongoing obligations to maintain fire safety measures and lodge Annual Fire Safety Statements (AFSS) each year. Certify Right assists with AFSS, Fire Safety Schedules, essential fire safety measures and compliance reviews.",
   },
   {
     id: "how-long",
@@ -83,7 +83,7 @@ export const faqs: FAQ[] = [
     category: "General",
     question: "My plans aren't finalised yet — can I still contact you?",
     answer:
-      "Absolutely — in fact, getting us involved early is often the best approach. We can advise you on the certification pathway that suits your project, flag any compliance issues before your plans are finalised, and help you avoid costly redesigns further down the track. A quick conversation at the planning stage can save significant time and money. Call or email us with what you are thinking and we will give you useful feedback straight away.",
+      "Absolutely — getting us involved early is often the best approach. We provide preliminary planning advice, CDC vs DA guidance, site constraints reviews and pre-lodgement advice, so you understand what is achievable before investing significant time and money. Call or email us with what you are planning and we will give you practical feedback.",
   },
   {
     id: "cdc-documents",
@@ -126,6 +126,27 @@ export const faqs: FAQ[] = [
     question: "How soon can I get started?",
     answer:
       "We aim to respond to all enquiries within 24 hours and provide a quote for your project promptly. Once you engage us, we begin the assessment process straight away. The speed of the certification process after that depends on the quality and completeness of your documentation — which is why we provide a clear checklist upfront. Call us on 0423 925 514 or send an email to info@certifyright.com.au and we will get back to you the same business day.",
+  },
+  {
+    id: "package-review",
+    category: "General",
+    question: "Can you review my documents before I lodge?",
+    answer:
+      "Yes. Incomplete or non-compliant documentation is one of the biggest causes of delays. Before lodgement, we review approval packages — including architectural plans, BASIX Certificates, structural engineering, stormwater designs, flood and bushfire reports, geotechnical reports, waste management plans, fire safety documentation and specialist consultant reports. Identifying issues early helps reduce delays, redesign costs and requests for additional information.",
+  },
+  {
+    id: "planning-portal",
+    category: "General",
+    question: "Can you help me with the NSW Planning Portal?",
+    answer:
+      "Yes. We work with the NSW Planning Portal every day. We can help you understand CDC and DA pathways, portal lodgements, requests for additional information, referral processes, required documentation, and approval sequencing and timeframes — helping you avoid common delays.",
+  },
+  {
+    id: "consultant-connections",
+    category: "General",
+    question: "Can you recommend architects, engineers or other consultants?",
+    answer:
+      "Yes. Through our industry network, we can connect you with experienced architects, town planners, structural and stormwater engineers, hydraulic consultants, fire safety practitioners, building designers, accredited energy assessors, surveyors and specialist consultants. Certify Right remains independent in its certification role, so you get access to trusted professionals while keeping the independence expected of a certifier.",
   },
 ];
 

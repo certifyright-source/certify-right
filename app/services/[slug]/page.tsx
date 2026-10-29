@@ -73,7 +73,7 @@ export default async function ServicePage({ params }: Props) {
             alt=""
             fill
             className="object-cover object-center"
-            priority
+            preload
             sizes="100vw"
           />
           {/* Left-to-right gradient: dark behind text, clears on right so image subject is visible */}

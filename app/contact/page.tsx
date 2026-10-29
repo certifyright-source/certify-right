@@ -61,7 +61,7 @@ export default function ContactPage() {
             fill
             className="object-cover"
             style={{ objectPosition: "65% center" }}
-            priority
+            preload
             sizes="100vw"
           />
           <div
