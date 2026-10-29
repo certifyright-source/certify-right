@@ -70,6 +70,87 @@ const TRUST_BADGES = [
 
 const AUTO_MS = 6000;
 
+const HEADLINE_CLASS =
+  "text-[2rem] sm:text-5xl lg:text-[3.25rem] xl:text-6xl font-bold text-white leading-[1.1] mb-5";
+const CTA1_CLASS =
+  "inline-flex items-center gap-2 bg-white text-[#0C2D5A] hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition-colors text-sm shadow-lg shadow-black/20";
+const CTA2_CLASS =
+  "inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 hover:bg-white/5 text-white font-semibold px-6 py-3.5 rounded-xl transition-all text-sm";
+
+// One slide's text. `sizer` renders a non-interactive copy (no h1 or links) used only to
+// reserve layout height; heading sits at the top and buttons/badges at the bottom.
+function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean }) {
+  const Heading = sizer ? "div" : "h1";
+  const cta2Content = (
+    <>
+      {slide.cta2.phone && <Phone className="w-4 h-4 flex-shrink-0" />}
+      {slide.cta2.label}
+    </>
+  );
+
+  return (
+    <>
+      {/* Chip — reserves two lines on phones, where the longest chip wraps, so headlines line up */}
+      <div className="flex flex-col justify-end min-h-8 sm:min-h-0 mb-5">
+        <div className="flex items-center gap-3">
+          <span className="h-px w-8 bg-blue-400 flex-shrink-0" />
+          <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">
+            {slide.chip}
+          </span>
+        </div>
+      </div>
+
+      {/* Headline */}
+      <Heading className={HEADLINE_CLASS}>
+        {slide.headline}
+        <br />
+        <span className="text-blue-300">{slide.accent}</span>
+      </Heading>
+
+      {/* Body */}
+      <p className="text-blue-100/90 text-base sm:text-lg leading-relaxed mb-8">{slide.body}</p>
+
+      <div className="mt-auto">
+        {/* CTAs — stacked on phones for every slide, so button rows line up */}
+        <div className="flex flex-col items-start sm:flex-row sm:flex-wrap gap-3 mb-10">
+          {sizer ? (
+            <>
+              <span className={CTA1_CLASS}>
+                {slide.cta1.label}
+                <ArrowRight className="w-4 h-4" />
+              </span>
+              <span className={CTA2_CLASS}>{cta2Content}</span>
+            </>
+          ) : (
+            <>
+              <Link href={slide.cta1.href} className={CTA1_CLASS}>
+                {slide.cta1.label}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a href={slide.cta2.href} className={CTA2_CLASS}>
+                {cta2Content}
+              </a>
+            </>
+          )}
+        </div>
+
+        {/* Trust badges */}
+        <div className="flex flex-wrap gap-2">
+          {TRUST_BADGES.map(({ Icon, label }) => (
+            <div
+              key={label}
+              className="flex items-center gap-2 bg-[#0C2D5A]/70 border border-white/20 rounded-lg px-3 py-2 backdrop-blur-sm"
+            >
+              <Icon className="w-3.5 h-3.5 text-blue-300 flex-shrink-0" />
+              <span className="text-white/90 text-xs font-medium whitespace-nowrap">{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
@@ -151,74 +232,37 @@ export default function HeroSlider() {
 
       {/* Main content — text on left, photo shows through on right */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="min-h-[90vh] py-20 lg:py-24 flex flex-col justify-center">
+        <div className="min-h-[90vh] py-12 sm:py-20 lg:py-24 flex flex-col justify-center">
 
           {/* Text block — constrained to left half on large screens */}
           <div className="max-w-xl lg:max-w-[600px]">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={`text-${current}`}
-                custom={direction}
-                variants={textVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.45, ease: "easeOut" }}
-              >
-                {/* Chip */}
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="h-px w-8 bg-blue-400 flex-shrink-0" />
-                  <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">
-                    {slide.chip}
-                  </span>
+            {/* All slides share one grid cell: invisible copies reserve the tallest slide's
+                height, so the hero, buttons and controls never move between slides. */}
+            <div className="grid">
+              {SLIDES.map((s) => (
+                <div
+                  key={`sizer-${s.id}`}
+                  className="invisible flex flex-col [grid-area:1/1]"
+                  aria-hidden="true"
+                >
+                  <SlideText slide={s} sizer />
                 </div>
-
-                {/* Headline */}
-                <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] xl:text-6xl font-bold text-white leading-[1.1] mb-5">
-                  {slide.headline}
-                  <br />
-                  <span className="text-blue-300">{slide.accent}</span>
-                </h1>
-
-                {/* Body */}
-                <p className="text-blue-100/90 text-lg leading-relaxed mb-8">
-                  {slide.body}
-                </p>
-
-                {/* CTAs */}
-                <div className="flex flex-wrap gap-3 mb-10">
-                  <Link
-                    href={slide.cta1.href}
-                    className="inline-flex items-center gap-2 bg-white text-[#0C2D5A] hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition-colors text-sm shadow-lg shadow-black/20"
-                  >
-                    {slide.cta1.label}
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <a
-                    href={slide.cta2.href}
-                    className="inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 hover:bg-white/5 text-white font-semibold px-6 py-3.5 rounded-xl transition-all text-sm"
-                  >
-                    {slide.cta2.phone && <Phone className="w-4 h-4 flex-shrink-0" />}
-                    {slide.cta2.label}
-                  </a>
-                </div>
-
-                {/* Trust badges */}
-                <div className="flex flex-wrap gap-2">
-                  {TRUST_BADGES.map(({ Icon, label }) => (
-                    <div
-                      key={label}
-                      className="flex items-center gap-2 bg-[#0C2D5A]/70 border border-white/20 rounded-lg px-3 py-2 backdrop-blur-sm"
-                    >
-                      <Icon className="w-3.5 h-3.5 text-blue-300 flex-shrink-0" />
-                      <span className="text-white/90 text-xs font-medium whitespace-nowrap">
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+              ))}
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={`text-${current}`}
+                  className="flex flex-col [grid-area:1/1]"
+                  custom={direction}
+                  variants={textVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                >
+                  <SlideText slide={slide} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             {/* Slide controls */}
             <div className="flex items-center gap-4 mt-12">
