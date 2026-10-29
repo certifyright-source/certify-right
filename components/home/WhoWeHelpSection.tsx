@@ -20,9 +20,9 @@ const groups = [
   },
   {
     icon: Building2,
-    title: "Developers",
+    title: "Developers, Architects & Consultants",
     description:
-      "From pre-DA compliance reviews to CDC assessments for multi-dwelling projects, we provide the expert certification support that keeps your development program on track.",
+      "From feasibility advice and approval package reviews to CDC assessments for multi-dwelling projects, we provide practical approval support that keeps your project on track.",
     cta: "Talk to Fadi",
     href: "/contact",
   },
@@ -52,7 +52,7 @@ export default function WhoWeHelpSection() {
             Building Approval Shouldn&apos;t Slow Your Project Down.
           </h2>
           <p className="text-slate-600 leading-relaxed">
-            Certify Right works with homeowners, builders, developers and granny flat companies
+            Certify Right works with homeowners, builders, architects, developers, consultants and granny flat companies
             across Greater Sydney and NSW.
           </p>
         </div>

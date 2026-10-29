@@ -40,7 +40,7 @@ export default function Footer() {
               <CRLogo variant="white" preload={false} />
             </Link>
             <p className="text-blue-100 text-sm leading-relaxed mb-6">
-              NSW Building Certification — Fast, Clear, Responsive and Done Right.
+              NSW Approvals, Certification & Compliance — Fast, Clear, Responsive and Done Right.
             </p>
             <div className="flex gap-3">
               <a

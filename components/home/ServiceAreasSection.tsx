@@ -25,7 +25,7 @@ export default function ServiceAreasSection() {
               </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-[#0C2D5A] mb-4 leading-tight">
-              NSW-Wide Building Certification
+              NSW-Wide Approvals & Compliance
             </h2>
             <div className="space-y-4 text-slate-600 leading-relaxed mb-6">
               <p>

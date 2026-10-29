@@ -23,13 +23,13 @@ export const services: Service[] = [
     tagline: "Fast-track approval for eligible residential projects — no council required.",
     description:
       "A Complying Development Certificate (CDC) is the fastest path to building approval for eligible projects. Skip the council DA process entirely and get your approval from a registered private certifier.",
-    longDescription: `A Complying Development Certificate (CDC) is a combined planning and construction approval that can be issued by a private certifier instead of going through council — making it significantly faster for eligible projects.
+    longDescription: `A CDC is a combined planning and construction approval issued by a private certifier instead of council — significantly faster for eligible projects.
 
-To qualify for a CDC, your project must comply with the State Environmental Planning Policy (SEPP) — Exempt and Complying Development Codes. This includes many standard residential builds, alterations, additions, granny flats, and demolition works.
+Your project must comply with the State Environmental Planning Policy (SEPP) — Exempt and Complying Development Codes. Many residential builds, alterations, additions, granny flats and demolition works qualify.
 
-At Certify Right, we review your plans against the relevant SEPP codes upfront and guide you through the process clearly. If your project qualifies, we handle the assessment and issue your CDC efficiently — so you can start construction sooner.
+We review your plans against the relevant codes upfront. If your project qualifies, we handle the assessment and issue your CDC efficiently — so you can start sooner.
 
-Fadi Habbouche is a NSW Fair Trading Registered Building Surveyor (Class A3, BDC2868) with over 15 years of experience across civil engineering, building surveying and council compliance. He knows the codes inside out and gives you straight answers.`,
+Fadi Habbouche is a NSW Fair Trading Registered Building Surveyor (Class A3, BDC2868) with 15+ years of industry experience.`,
     features: [
       "No council lodgement required — faster approval pathway",
       "Thorough assessment against SEPP Complying Development Codes",
@@ -63,11 +63,11 @@ Fadi Habbouche is a NSW Fair Trading Registered Building Surveyor (Class A3, BDC
     tagline: "Approval to commence construction — confirms your plans meet the Building Code.",
     description:
       "A Construction Certificate confirms your construction plans and specifications comply with the Building Code of Australia (BCA/NCC) and any relevant development consent conditions. It is required before building work can commence.",
-    longDescription: `Once you have a development consent (DA) approved by council, you need a Construction Certificate before any building work can start. The CC confirms that your detailed construction plans and specifications comply with the Building Code of Australia (BCA/NCC) and any conditions attached to your DA.
+    longDescription: `Once council approves your development consent (DA), you need a Construction Certificate before building work can start. The CC confirms your construction plans and specifications comply with the BCA/NCC and your DA conditions.
 
-A Construction Certificate is issued by either a private certifier or council. Using a private certifier like Certify Right is generally faster and gives you direct access to a qualified professional who reviews your plans thoroughly and communicates clearly.
+A CC can be issued by council or a private certifier. A private certifier is generally faster and gives you direct access to the person reviewing your plans.
 
-We assess your documentation, identify any issues early, and work with you to resolve them before issuing the certificate — so there are no surprises on site.`,
+We assess your documentation, identify issues early and help resolve them before issuing — so there are no surprises on site.`,
     features: [
       "Review of construction plans and specifications for BCA/NCC compliance",
       "Assessment of DA conditions and how they apply to your design",
@@ -100,11 +100,11 @@ We assess your documentation, identify any issues early, and work with you to re
     tagline: "The final sign-off confirming your building is safe and legal to occupy.",
     description:
       "An Occupation Certificate is the final step in the certification process. It confirms that your building has been constructed in accordance with the relevant approval and is safe and suitable for occupation.",
-    longDescription: `An Occupation Certificate (OC) is issued at the completion of a building project. It confirms that the building has been constructed in accordance with the relevant approval — whether a CDC or a DA/CC — and that it is safe and fit to occupy.
+    longDescription: `An Occupation Certificate (OC) is issued when a building project is complete. It confirms the building was constructed in accordance with the relevant approval — CDC or DA/CC — and is safe and fit to occupy.
 
-You cannot legally occupy a new building or a newly completed extension without an OC. The OC is only issued once all required critical stage inspections have been completed satisfactorily and any outstanding issues have been resolved.
+You cannot legally occupy a new building or completed extension without an OC. It is only issued once all required critical stage inspections are satisfactorily completed and any outstanding issues are resolved.
 
-At Certify Right, we manage the inspection process from start to finish and work with you to ensure any issues are addressed promptly. We make the path to your Occupation Certificate as smooth as possible.`,
+We manage the inspection process from start to finish and help you address issues promptly.`,
     features: [
       "Final confirmation that your building is safe and legal to occupy",
       "Issued only after all required inspections are completed",
@@ -137,11 +137,11 @@ At Certify Right, we manage the inspection process from start to finish and work
     tagline: "Your legally required certification supervisor — from first inspection to final certificate.",
     description:
       "Under the Environmental Planning and Assessment Act, a Principal Certifier (PC) must be appointed for all development projects requiring certification. Certify Right can act as your Principal Certifier, managing the full inspection and certification process.",
-    longDescription: `Under NSW law, a Principal Certifier must be appointed for any development that requires certification. The Principal Certifier is responsible for coordinating and conducting critical stage inspections, ensuring the building is constructed in accordance with the relevant approval, and ultimately issuing the Occupation Certificate.
+    longDescription: `Under NSW law, a Principal Certifier must be appointed for any development that requires certification. The Principal Certifier conducts critical stage inspections, confirms the building is constructed in accordance with the approval, and issues the Occupation Certificate.
 
-Appointing Certify Right as your Principal Certifier gives you a direct line to Fadi Habbouche — an experienced Registered Building Surveyor who responds promptly, keeps you informed, and manages the certification process efficiently.
+Appointing Certify Right gives you direct access to Fadi Habbouche, a Registered Building Surveyor who responds promptly and keeps you informed.
 
-We handle the documentation, inspection scheduling, compliance monitoring, and final certification. You focus on building; we focus on keeping the process moving.`,
+We handle documentation, inspection scheduling, compliance monitoring and final certification — so you can focus on building.`,
     features: [
       "Legally required appointment under NSW building legislation",
       "Coordination of all required critical stage inspections",
@@ -169,14 +169,14 @@ We handle the documentation, inspection scheduling, compliance monitoring, and f
   {
     id: "bca-ncc-compliance",
     slug: "bca-ncc-compliance",
-    title: "BCA & NCC Compliance",
+    title: "BCA & NCC Compliance Reports",
     shortTitle: "BCA & NCC Compliance",
     tagline: "Practical compliance advice from the earliest stages of design — fewer redesigns and delays.",
     description:
       "Building Code of Australia (BCA) and National Construction Code (NCC) compliance reviews and advice from the earliest stages of design — identifying issues before submission to reduce costly redesigns and approval delays.",
     longDescription: `We provide practical Building Code of Australia (BCA) and National Construction Code (NCC) compliance advice from the earliest stages of design.
 
-Our assessments identify potential compliance issues before submission — reducing costly redesigns and approval delays.
+Our assessments help identify potential compliance issues before submission, reducing costly redesigns and approval delays.
 
 We work closely with designers and consultants to find practical compliance outcomes.`,
     features: [
@@ -211,11 +211,11 @@ We work closely with designers and consultants to find practical compliance outc
     tagline: "Practical direction early — understand what is achievable before you invest time and money.",
     description:
       "Preliminary planning advice, approval pathway reviews, CDC vs DA guidance and pre-lodgement support — so you understand what is achievable before investing significant time and money.",
-    longDescription: `Not every project starts with a building approval. Many clients need guidance before engaging architects or consultants.
+    longDescription: `Not every project starts with a building approval. Many clients require guidance before engaging architects or consultants.
 
-We provide practical direction early — helping you understand what is achievable on your site, which approval pathway suits your project, and what is needed before lodgement.
+We help you understand what is achievable on your site, which approval pathway suits your project, and what is needed before lodgement.
 
-Our goal is to help you avoid wasted time and money, and submit a stronger application the first time.`,
+Our goal is to provide practical direction early, helping clients understand what is achievable before investing significant time and money.`,
     features: [
       "Preliminary planning advice",
       "Approval pathway reviews",
@@ -250,11 +250,11 @@ Our goal is to help you avoid wasted time and money, and submit a stronger appli
     tagline: "Fast-track demolition certification where eligible — required before the new build begins.",
     description:
       "Demolition certificates for eligible projects under the Complying Development pathway. Required before demolition commences — we assess eligibility and issue your certificate efficiently.",
-    longDescription: `Before demolishing a structure in NSW, you need the appropriate approval. For eligible demolition works, a Complying Development Certificate for demolition can be issued by a private certifier — offering a faster alternative to council approval.
+    longDescription: `Demolishing a structure in NSW requires approval. For eligible works, a private certifier can issue a Complying Development Certificate for demolition — a faster alternative to council approval.
 
-Certify Right assesses whether your demolition project meets the eligibility criteria under the relevant SEPP, handles the required documentation, and issues your demolition certificate promptly.
+We assess eligibility under the relevant SEPP, handle the required documentation and issue your certificate promptly.
 
-We also coordinate with the relevant authorities and ensure any asbestos management requirements are identified and addressed. Getting this step right upfront avoids delays to your subsequent construction project.`,
+We also coordinate with relevant authorities and identify any asbestos management requirements — avoiding delays to your next stage of construction.`,
     features: [
       "Assessment of eligibility for CDC demolition pathway",
       "Faster than council lodgement for eligible projects",
@@ -287,11 +287,9 @@ We also coordinate with the relevant authorities and ensure any asbestos managem
     tagline: "Pool barrier inspections and compliance certificates for NSW residential properties.",
     description:
       "Swimming pool barrier inspections and compliance certificates for NSW residential properties. Required under the Swimming Pools Act 1992 — we make the process straightforward.",
-    longDescription: `Under the NSW Swimming Pools Act 1992, all residential swimming pools and spas must be surrounded by a compliant child-resistant barrier. Pool owners are required to obtain a compliance certificate when selling or leasing a property with a pool, and must register their pool on the NSW Swimming Pool Register.
+    longDescription: `Under the NSW Swimming Pools Act 1992, residential pools and spas must have a compliant child-resistant barrier. Owners need a compliance certificate when selling or leasing a property with a pool, and must register the pool on the NSW Swimming Pool Register.
 
-Certify Right conducts swimming pool barrier inspections and issues compliance certificates for pools that meet the requirements. If your pool barrier doesn't comply, we identify the deficiencies clearly and tell you exactly what needs to be rectified.
-
-The process is straightforward: we inspect the pool barrier, assess compliance with the relevant Australian Standards and legislation, and either issue your certificate or provide a clear deficiency report.`,
+We inspect the barrier against the relevant Australian Standards and legislation, then either issue your compliance certificate or provide a clear deficiency report showing exactly what needs to be rectified.`,
     features: [
       "Pool barrier inspection under the Swimming Pools Act 1992",
       "Compliance certificate issued for compliant barriers",
@@ -324,11 +322,11 @@ The process is straightforward: we inspect the pool barrier, assess compliance w
     tagline: "Critical-stage inspections at every required point — so nothing is missed and your OC is never held up.",
     description:
       "Critical stage building inspections throughout the construction process. Required at specified stages of construction — we conduct thorough, responsive inspections that keep your project on track.",
-    longDescription: `Critical stage inspections are a mandatory part of the building certification process in NSW. They must be conducted at specific stages of construction — such as before footings are poured, at frame stage, and at practical completion — to ensure the work complies with the relevant approval and the Building Code.
+    longDescription: `Critical stage inspections are mandatory in NSW. They are conducted at set stages — such as before footings are poured, at frame stage and at practical completion — to confirm the work complies with the approval and the Building Code.
 
-At Certify Right, we conduct thorough inspections at every required stage and respond promptly to booking requests. We communicate clearly about what we find and work with builders and owners to resolve any issues quickly, so your project keeps moving.
+We inspect thoroughly at every required stage, respond promptly to bookings, and work with builders and owners to resolve issues quickly.
 
-Fadi's background as a civil engineer means he understands construction from the ground up — not just from a paperwork perspective. That practical knowledge makes a difference when assessing complex or unusual situations on site.`,
+Fadi's civil engineering background brings practical, on-site knowledge to complex or unusual situations.`,
     features: [
       "All mandatory critical stage inspections conducted",
       "Prompt scheduling and responsive communication",
@@ -363,7 +361,7 @@ Fadi's background as a civil engineer means he understands construction from the
       "Annual Fire Safety Statements (AFSS), Fire Safety Schedules, essential fire safety measures and compliance advice for NSW building owners and property managers.",
     longDescription: `Fire safety requirements can be complex for building owners and property managers.
 
-As a qualified Fire Safety Professional, Fadi understands both the technical and regulatory requirements for maintaining compliant buildings.
+Our fire safety experience helps us understand the technical and regulatory requirements for maintaining compliant buildings.
 
 We assess fire safety measures, identify deficiencies, and give clear advice on what is needed to achieve and maintain compliance.`,
     features: [

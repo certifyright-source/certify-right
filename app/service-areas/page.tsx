@@ -5,9 +5,9 @@ import { ArrowRight, MapPin, CheckCircle2 } from "lucide-react";
 import CTASection from "@/components/home/CTASection";
 
 export const metadata: Metadata = {
-  title: "Service Areas — NSW Building Certification",
+  title: "Service Areas — NSW Approvals, Certification & Compliance",
   description:
-    "Certify Right provides NSW building certification services across Greater Sydney and regional NSW. Based in Merrylands, we cover Parramatta, Blacktown, Liverpool, Campbelltown, Hills District, Inner West, Eastern Suburbs and more.",
+    "Certify Right provides planning advice, approvals, certification and compliance services across Greater Sydney and regional NSW. Based in Merrylands, we cover Parramatta, Blacktown, Liverpool, Campbelltown, Hills District, Inner West, Eastern Suburbs and more.",
   alternates: { canonical: "https://certifyright.com.au/service-areas" },
 };
 
@@ -68,11 +68,11 @@ export default function ServiceAreasPage() {
                 <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">Service Areas</span>
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                NSW Building Certification — Greater Sydney & Beyond
+                Approvals, Certification & Compliance — Greater Sydney & Beyond
               </h1>
               <p className="text-blue-100 text-xl leading-relaxed">
-                Based in Merrylands, Certify Right provides building certification across
-                Greater Sydney and regional NSW. Contact us to confirm coverage for your location.
+                Based in Merrylands, Certify Right helps clients navigate planning, certification,
+                compliance and approvals across Greater Sydney and regional NSW. Contact us to confirm coverage for your location.
               </p>
               <div className="flex items-center gap-2 mt-6 text-blue-200">
                 <MapPin className="w-4 h-4 flex-shrink-0" />
@@ -96,14 +96,15 @@ export default function ServiceAreasPage() {
                 Greater Sydney
               </h2>
               <p className="text-slate-600 leading-relaxed mb-6">
-                We provide CDC, Construction Certificate, Occupation Certificate, Principal
-                Certifier, and inspection services across all major Greater Sydney areas.
+                We provide planning and approval advice, CDC, Construction Certificate, Occupation
+                Certificate, Principal Certifier, compliance and inspection services across all
+                major Greater Sydney areas.
               </p>
               <div className="bg-[#F8FAFC] rounded-xl p-5 border border-slate-100">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#185FA5] flex-shrink-0 mt-0.5" />
                   <p className="text-slate-700 text-sm leading-relaxed">
-                    All 10 building certification services available across Greater Sydney.
+                    All of our approval, certification and compliance services are available across Greater Sydney.
                     Contact us for a same-business-day response.
                   </p>
                 </div>
