@@ -19,9 +19,9 @@ interface Slide {
 const SLIDES: Slide[] = [
   {
     id: 0,
-    chip: "Building Certification FAQ",
+    chip: "Approvals & Certification FAQ",
     heading: "Frequently Asked Questions",
-    body: "Plain-English answers about CDCs, construction certificates, occupation certificates, inspections, and the NSW building certification process.",
+    body: "Plain-English answers about CDCs, construction certificates, occupation certificates, inspections, approvals, compliance and the NSW Planning Portal.",
     bg: "/images/faq-slide-3.webp",
     objectPos: "45% center",
   },
@@ -29,7 +29,7 @@ const SLIDES: Slide[] = [
     id: 1,
     chip: "Know the Process",
     heading: "Your Questions. Clear Answers.",
-    body: "Understanding how certification works before you start saves time, reduces surprises, and helps keep your project on track.",
+    body: "Understanding how approvals and certification work before you start saves time, reduces surprises, and helps keep your project on track.",
     bg: "/images/faq-slide-1.webp",
     objectPos: "55% center",
   },

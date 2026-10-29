@@ -29,7 +29,7 @@ const serviceOptions = [
   { value: "construction-certificate", label: "Construction Certificate" },
   { value: "occupation-certificate", label: "Occupation Certificate" },
   { value: "principal-certifier", label: "Principal Certifier Appointment" },
-  { value: "bca-compliance", label: "BCA & NCC Compliance" },
+  { value: "bca-compliance", label: "BCA & NCC Compliance Reports" },
   { value: "da-support", label: "Development & Approval Support" },
   { value: "approval-package-review", label: "Approval Package Review" },
   { value: "planning-portal", label: "NSW Planning Portal Assistance" },

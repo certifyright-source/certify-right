@@ -6,7 +6,7 @@ import { Phone, Mail, MapPin, Clock, ShieldCheck } from "lucide-react";
 export const metadata: Metadata = {
   title: "Contact Us — Get a Quote",
   description:
-    "Contact Certify Right to discuss your NSW building certification requirements. Call Fadi directly on 0423 925 514 or send an enquiry. 24-hour quote turnaround.",
+    "Contact Certify Right to discuss planning, approvals, certification, fire safety or compliance for your NSW project. Call Fadi directly on 0423 925 514 or send an enquiry. 24-hour quote turnaround.",
   alternates: { canonical: "https://certifyright.com.au/contact" },
 };
 

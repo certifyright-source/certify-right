@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = getServiceBySlug(slug);
   if (!service) return {};
   return {
-    title: `${service.title} | NSW Building Certification`,
+    title: `${service.title} | NSW Approvals & Certification`,
     description: service.description,
     alternates: {
       canonical: `https://certifyright.com.au/services/${service.slug}`,

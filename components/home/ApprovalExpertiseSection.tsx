@@ -13,13 +13,14 @@ const blocks = [
       "BASIX Certificates",
       "Structural engineering",
       "Stormwater designs",
-      "Flood and bushfire reports",
+      "Flood reports",
+      "Bushfire reports",
       "Geotechnical reports",
       "Waste management plans",
       "Fire safety documentation",
       "Specialist consultant reports",
     ],
-    outro: "Our aim: stronger applications, submitted right the first time.",
+    outro: "Our aim is to help clients submit stronger applications the first time.",
   },
   {
     icon: Globe,
@@ -36,7 +37,7 @@ const blocks = [
       "Required documentation",
       "Approval sequencing and timeframes",
     ],
-    outro: "Avoid common delays and unnecessary frustration.",
+    outro: "Our experience helps clients avoid common delays and unnecessary frustration.",
   },
   {
     icon: Users,
@@ -47,15 +48,17 @@ const blocks = [
     items: [
       "Architects",
       "Town planners",
-      "Structural and stormwater engineers",
+      "Structural engineers",
+      "Stormwater engineers",
       "Hydraulic consultants",
       "Fire safety practitioners",
       "Building designers",
       "Accredited energy assessors",
-      "Surveyors and specialist consultants",
+      "Surveyors",
+      "Specialist consultants",
     ],
     outro:
-      "Certify Right remains independent in its certification role — you get access to trusted professionals while keeping the independence expected of a certifier.",
+      "While Certify Right remains independent in its certification role, we understand how to coordinate and navigate the broader approval process to help keep projects moving efficiently. This allows clients to access trusted industry professionals while maintaining the independence expected of a certifier.",
   },
 ];
 

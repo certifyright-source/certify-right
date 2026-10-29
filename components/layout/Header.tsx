@@ -92,7 +92,7 @@ export default function Header() {
             <div className="flex items-center justify-between h-9 text-xs">
               <div className="flex items-center gap-4">
                 <span className="font-semibold text-blue-100 hidden sm:block">
-                  NSW Building Certification
+                  NSW Approvals & Compliance
                 </span>
                 <span className="text-blue-300 hidden md:block">·</span>
                 <span className="text-blue-100 hidden md:block">

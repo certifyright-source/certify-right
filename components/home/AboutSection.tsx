@@ -31,14 +31,15 @@ export default function AboutSection() {
             </h2>
             <div className="space-y-4 text-slate-600 leading-relaxed mb-8">
               <p>
-                We do more than issue certificates. We help homeowners, builders, architects,
-                developers and consultants navigate planning, certification, compliance and
-                approval pathways across NSW.
+                At Certify Right, we do more than issue certificates. We help homeowners,
+                builders, architects, developers and consultants navigate planning,
+                certification, compliance and approval pathways across NSW.
               </p>
               <p>
-                Whether you need a CDC, Construction Certificate, Occupation Certificate,
-                BCA/building compliance advice, or guidance before buying or designing a
-                property — we give clear, practical advice that keeps your project moving.
+                Whether you&apos;re pursuing a CDC, Construction Certificate, Occupation
+                Certificate, BCA/Building Compliance or seeking advice before purchasing or
+                designing a property, our focus is on providing clear, practical guidance that
+                helps keep your project moving.
               </p>
             </div>
             {/* Video — replace src with the Certify Right company video when available */}
@@ -78,8 +79,8 @@ export default function AboutSection() {
                 ))}
               </ul>
               <p className="text-slate-600 text-sm leading-relaxed mt-5 pt-5 border-t border-slate-200">
-                We understand projects from multiple perspectives — so we identify issues early
-                and provide practical pathways forward.
+                We understand projects from multiple perspectives, allowing us to identify issues
+                early and provide practical pathways forward.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
