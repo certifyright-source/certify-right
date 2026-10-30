@@ -77,8 +77,8 @@ const CTA1_CLASS =
 const CTA2_CLASS =
   "inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 hover:bg-white/5 text-white font-semibold px-6 py-3.5 rounded-xl transition-all text-sm";
 
-// One slide's text. `sizer` renders a non-interactive copy (no h1 or links) used only to
-// reserve layout height; heading sits at the top and buttons/badges at the bottom.
+// One slide's text, top-aligned with natural spacing. `sizer` renders a non-interactive copy
+// (no h1 or links) used only to reserve the tallest slide's height.
 function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean }) {
   const Heading = sizer ? "div" : "h1";
   const cta2Content = (
@@ -91,7 +91,7 @@ function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean
   return (
     <>
       {/* Chip — reserves two lines on phones, where the longest chip wraps, so headlines line up */}
-      <div className="flex flex-col justify-end min-h-8 sm:min-h-0 mb-5">
+      <div className="min-h-8 sm:min-h-0 mb-5">
         <div className="flex items-center gap-3">
           <span className="h-px w-8 bg-blue-400 flex-shrink-0" />
           <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">
@@ -110,9 +110,9 @@ function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean
       {/* Body */}
       <p className="text-blue-100/90 text-base sm:text-lg leading-relaxed mb-8">{slide.body}</p>
 
-      <div className="mt-auto">
-        {/* CTAs — stacked on phones for every slide, so button rows line up */}
-        <div className="flex flex-col items-start sm:flex-row sm:flex-wrap gap-3 mb-10">
+      <div>
+        {/* CTAs */}
+        <div className="flex flex-wrap gap-3 mb-8">
           {sizer ? (
             <>
               <span className={CTA1_CLASS}>

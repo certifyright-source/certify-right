@@ -17,43 +17,27 @@ export default function AboutSection() {
   return (
     <section className="py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="h-px w-8 bg-[#185FA5]" />
+          <span className="text-[#185FA5] text-xs font-semibold tracking-widest uppercase">
+            About Certify Right
+          </span>
+        </div>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="h-px w-8 bg-[#185FA5]" />
-              <span className="text-[#185FA5] text-xs font-semibold tracking-widest uppercase">
-                About Certify Right
-              </span>
-            </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#0C2D5A] mb-4 leading-tight">
-              More Than Certification. Real Approval Expertise.
-            </h2>
-            <div className="space-y-4 text-slate-600 leading-relaxed mb-8">
-              <p>
-                At Certify Right, we do more than issue certificates. We help homeowners,
-                builders, architects, developers and consultants navigate planning,
-                certification, compliance and approval pathways across NSW.
-              </p>
-              <p>
-                Whether you&apos;re pursuing a CDC, Construction Certificate, Occupation
-                Certificate, BCA/Building Compliance or seeking advice before purchasing or
-                designing a property, our focus is on providing clear, practical guidance that
-                helps keep your project moving.
-              </p>
-            </div>
-            {/* Video — replace src with the Certify Right company video when available */}
-            <div className="relative w-full rounded-xl overflow-hidden shadow-lg aspect-video bg-[#0C2D5A] mb-8">
+            {/* Brand video — 9:16, letterboxed on navy (object-contain, never cropped).
+                preload="none" loads only the poster until Play; the MP4 is fast-start encoded. */}
+            <div className="relative w-full rounded-xl overflow-hidden shadow-lg aspect-[4/5] sm:aspect-square bg-[#0C2D5A] mb-8">
               <video
-                className="w-full h-full"
+                className="absolute inset-0 w-full h-full object-contain"
                 controls
-                poster="/images/hero-new.webp"
-                preload="metadata"
+                playsInline
+                preload="none"
+                poster="/images/brand-video-poster.webp"
+                aria-label="Certify Right brand video"
               >
-                <source
-                  src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-                  type="video/mp4"
-                />
+                <source src="/videos/certify-right-brand-video.mp4" type="video/mp4" />
               </video>
             </div>
 
