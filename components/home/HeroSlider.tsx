@@ -24,6 +24,8 @@ interface SlideData {
   cta2: { label: string; href: string; phone?: boolean };
   bg: string;
   objectPos: string;
+  /** Crop position below 640px, where only a narrow strip of the banner is visible. */
+  objectPosMobile?: string;
 }
 
 const SLIDES: SlideData[] = [
@@ -35,8 +37,9 @@ const SLIDES: SlideData[] = [
     body: "Helping homeowners, builders, architects and developers navigate planning, certification, fire safety and compliance across NSW. From planning advice and approval package reviews through to certification and final occupation, we provide practical guidance, responsive communication and a clear path forward.",
     cta1: { label: "Get a Quote Within 24 Hours", href: "/contact" },
     cta2: { label: "0423 925 514", href: "tel:0423925514", phone: true },
-    bg: "/images/hero-new.webp",
-    objectPos: "65% center",
+    bg: "/images/hero-banner-1.webp",
+    objectPos: "90% 30%",
+    objectPosMobile: "85% 30%",
   },
   {
     id: 1,
@@ -46,8 +49,9 @@ const SLIDES: SlideData[] = [
     body: "A CDC is the fastest approval pathway for eligible residential projects. We assess your project against the SEPP codes and give you a straight answer upfront.",
     cta1: { label: "Learn About CDC", href: "/services/complying-development-certificate" },
     cta2: { label: "Call Fadi", href: "tel:0423925514", phone: true },
-    bg: "/images/hero-2.webp",
-    objectPos: "60% center",
+    bg: "/images/hero-banner-2.webp",
+    objectPos: "60% 30%",
+    objectPosMobile: "67% 30%",
   },
   {
     id: 2,
@@ -57,8 +61,9 @@ const SLIDES: SlideData[] = [
     body: "Not every project starts with a building approval. We provide practical direction early, helping you understand what is achievable before investing significant time and money.",
     cta1: { label: "Our Services", href: "/services" },
     cta2: { label: "Service Areas", href: "/service-areas" },
-    bg: "/images/hero-3.webp",
-    objectPos: "65% top",
+    bg: "/images/hero-banner-3.webp",
+    objectPos: "95% center",
+    objectPosMobile: "83% center",
   },
 ];
 
@@ -214,8 +219,13 @@ export default function HeroSlider() {
             src={slide.bg}
             alt=""
             fill
-            className="object-cover"
-            style={{ objectPosition: slide.objectPos }}
+            className="object-cover object-[var(--hero-pos-m)] sm:object-[var(--hero-pos)]"
+            style={
+              {
+                "--hero-pos": slide.objectPos,
+                "--hero-pos-m": slide.objectPosMobile ?? slide.objectPos,
+              } as React.CSSProperties
+            }
             preload={current === 0}
             sizes="100vw"
           />
