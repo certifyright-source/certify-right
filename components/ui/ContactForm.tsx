@@ -2,54 +2,26 @@
 
 import { useState, useRef } from "react";
 import { ArrowRight, Upload, X, CheckCircle2, AlertCircle } from "lucide-react";
+import {
+  MAX_FILE_SIZE,
+  MAX_FILE_SIZE_LABEL,
+  SERVICE_OPTIONS,
+  isPdfName,
+  validateContactFields,
+  type ContactErrors,
+  type ContactFields,
+} from "@/lib/contact";
 
-interface FormData {
-  fullName: string;
-  phone: string;
-  email: string;
-  service: string;
-  propertyAddress: string;
-  description: string;
+interface FormData extends ContactFields {
   file: File | null;
 }
 
-interface FormErrors {
-  fullName?: string;
-  phone?: string;
-  email?: string;
-  service?: string;
-  propertyAddress?: string;
-  description?: string;
-  file?: string;
-}
+type FormErrors = ContactErrors;
 
-const serviceOptions = [
-  { value: "", label: "Select a service..." },
-  { value: "cdc", label: "Complying Development Certificate (CDC)" },
-  { value: "construction-certificate", label: "Construction Certificate" },
-  { value: "occupation-certificate", label: "Occupation Certificate" },
-  { value: "principal-certifier", label: "Principal Certifier Appointment" },
-  { value: "bca-compliance", label: "BCA & NCC Compliance Reports" },
-  { value: "da-support", label: "Development & Approval Support" },
-  { value: "approval-package-review", label: "Approval Package Review" },
-  { value: "planning-portal", label: "NSW Planning Portal Assistance" },
-  { value: "demolition", label: "Demolition Certificate" },
-  { value: "swimming-pool", label: "Swimming Pool Compliance" },
-  { value: "building-inspections", label: "Building Inspections" },
-  { value: "fire-safety", label: "Fire Safety & AFSS" },
-  { value: "other", label: "Other" },
-  { value: "not-sure", label: "Not Sure — Happy to Discuss" },
-];
+const serviceOptions = [{ value: "", label: "Select a service..." }, ...SERVICE_OPTIONS];
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-
-function validateEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function validatePhone(phone: string) {
-  return /^[\d\s\+\-\(\)]{8,}$/.test(phone.trim());
-}
+const FILE_SIZE_ERROR = `File must be under ${MAX_FILE_SIZE_LABEL}.`;
+const FILE_TYPE_ERROR = "Please upload a PDF file.";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -66,27 +38,11 @@ export default function ContactForm() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const validate = (): FormErrors => {
-    const e: FormErrors = {};
-    if (!formData.fullName.trim()) e.fullName = "Full name is required.";
-    if (!formData.phone.trim()) {
-      e.phone = "Phone number is required.";
-    } else if (!validatePhone(formData.phone)) {
-      e.phone = "Please enter a valid phone number.";
-    }
-    if (!formData.email.trim()) {
-      e.email = "Email address is required.";
-    } else if (!validateEmail(formData.email)) {
-      e.email = "Please enter a valid email address.";
-    }
-    if (!formData.service) e.service = "Please select a service.";
-    if (!formData.propertyAddress.trim()) e.propertyAddress = "Property address is required.";
-    if (!formData.description.trim()) {
-      e.description = "Please provide a brief project description.";
-    } else if (formData.description.trim().length < 10) {
-      e.description = "Please provide a bit more detail.";
-    }
+    const e = validateContactFields(formData);
     if (formData.file && formData.file.size > MAX_FILE_SIZE) {
-      e.file = "File must be under 10MB.";
+      e.file = FILE_SIZE_ERROR;
+    } else if (formData.file && !isPdfName(formData.file.name)) {
+      e.file = FILE_TYPE_ERROR;
     }
     return e;
   };
@@ -103,8 +59,14 @@ export default function ContactForm() {
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
-    if (file && file.size > MAX_FILE_SIZE) {
-      setErrors((prev) => ({ ...prev, file: "File must be under 10MB." }));
+    const fileError =
+      file && file.size > MAX_FILE_SIZE
+        ? FILE_SIZE_ERROR
+        : file && !isPdfName(file.name)
+          ? FILE_TYPE_ERROR
+          : null;
+    if (fileError) {
+      setErrors((prev) => ({ ...prev, file: fileError }));
       setFormData((prev) => ({ ...prev, file: null }));
       e.target.value = "";
       return;
@@ -127,9 +89,28 @@ export default function ContactForm() {
       return;
     }
     setStatus("submitting");
-    // TODO: Replace with real API call
-    await new Promise((r) => setTimeout(r, 1500));
-    setStatus("success");
+
+    const body = new FormData();
+    body.append("fullName", formData.fullName);
+    body.append("phone", formData.phone);
+    body.append("email", formData.email);
+    body.append("service", formData.service);
+    body.append("propertyAddress", formData.propertyAddress);
+    body.append("description", formData.description);
+    if (formData.file) body.append("file", formData.file);
+
+    try {
+      const res = await fetch("/api/contact", { method: "POST", body });
+      if (res.ok) {
+        setStatus("success");
+        return;
+      }
+      const data = await res.json().catch(() => null);
+      if (res.status === 400 && data?.errors) setErrors(data.errors);
+      setStatus("error");
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
@@ -165,10 +146,10 @@ export default function ContactForm() {
       </p>
 
       {status === "error" && (
-        <div className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-xl p-4 mb-6">
+        <div role="alert" className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-xl p-4 mb-6">
           <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
           <p className="text-red-700 text-sm">
-            Something went wrong. Please try again or call Fadi on{" "}
+            Your enquiry could not be sent. Please check the form and try again, or call Fadi on{" "}
             <a href="tel:0423925514" className="font-semibold underline">
               0423 925 514
             </a>
@@ -318,7 +299,7 @@ export default function ContactForm() {
             <span className="text-slate-400 font-normal">(Optional)</span>
           </label>
           <p className="text-slate-400 text-xs mb-2">
-            PDF only · Maximum 10MB
+            PDF only · Maximum {MAX_FILE_SIZE_LABEL}
           </p>
 
           {formData.file ? (
@@ -354,7 +335,7 @@ export default function ContactForm() {
               <span className="text-slate-600 text-sm font-medium">
                 Click to upload or drag and drop
               </span>
-              <span className="text-slate-400 text-xs">PDF · Max 10MB</span>
+              <span className="text-slate-400 text-xs">PDF · Max {MAX_FILE_SIZE_LABEL}</span>
               <input
                 id="file"
                 ref={fileInputRef}
