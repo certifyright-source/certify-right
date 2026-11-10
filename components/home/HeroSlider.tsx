@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
@@ -24,8 +24,6 @@ interface SlideData {
   cta2: { label: string; href: string; phone?: boolean };
   bg: string;
   objectPos: string;
-  /** Crop position below 640px, where only a narrow strip of the banner is visible. */
-  objectPosMobile?: string;
 }
 
 const SLIDES: SlideData[] = [
@@ -39,7 +37,6 @@ const SLIDES: SlideData[] = [
     cta2: { label: "0423 925 514", href: "tel:0423925514", phone: true },
     bg: "/images/hero-banner-1.webp",
     objectPos: "90% 30%",
-    objectPosMobile: "85% 30%",
   },
   {
     id: 1,
@@ -51,7 +48,6 @@ const SLIDES: SlideData[] = [
     cta2: { label: "Call Fadi", href: "tel:0423925514", phone: true },
     bg: "/images/hero-banner-2.webp",
     objectPos: "60% 30%",
-    objectPosMobile: "67% 30%",
   },
   {
     id: 2,
@@ -63,7 +59,6 @@ const SLIDES: SlideData[] = [
     cta2: { label: "Service Areas", href: "/service-areas" },
     bg: "/images/hero-banner-3.webp",
     objectPos: "95% center",
-    objectPosMobile: "83% center",
   },
 ];
 
@@ -74,6 +69,13 @@ const TRUST_BADGES = [
 ];
 
 const AUTO_MS = 6000;
+
+// Phones (< 640px) show one full-hero background on every slide: the construction-site banner.
+// The tall hero renders it ~1.8× the screen width, so request the full 2000px source.
+const MOBILE_BG = "/images/hero-banner-3.webp";
+const MOBILE_BG_POS = "78% center";
+const MOBILE_BG_SIZES = "1600px";
+const MOBILE_BG_QUALITY = 90;
 
 const HEADLINE_CLASS =
   "text-[2rem] sm:text-5xl lg:text-[3.25rem] xl:text-6xl font-bold text-white leading-[1.1] mb-5";
@@ -187,6 +189,14 @@ export default function HeroSlider() {
   }, [goNext, paused]);
 
   const slide = SLIDES[current];
+  const { props: desktopBg } = getImageProps({ src: slide.bg, alt: "", fill: true, sizes: "100vw" });
+  const { props: mobileBg } = getImageProps({
+    src: MOBILE_BG,
+    alt: "",
+    fill: true,
+    sizes: MOBILE_BG_SIZES,
+    quality: MOBILE_BG_QUALITY,
+  });
   const dy = reduced ? 0 : 18;
 
   const textVariants = {
@@ -215,26 +225,40 @@ export default function HeroSlider() {
           transition={{ duration: 0.8 }}
           aria-hidden="true"
         >
-          <Image
-            src={slide.bg}
-            alt=""
-            fill
-            className="object-cover object-[var(--hero-pos-m)] sm:object-[var(--hero-pos)]"
-            style={
-              {
-                "--hero-pos": slide.objectPos,
-                "--hero-pos-m": slide.objectPosMobile ?? slide.objectPos,
-              } as React.CSSProperties
-            }
-            preload={current === 0}
-            sizes="100vw"
-          />
+          {/* One <img>, art-directed: sm+ uses the slide's own banner (as before); phones use the
+              shared construction-site banner. Each device downloads only the image it shows. */}
+          <picture>
+            <source media="(min-width: 640px)" srcSet={desktopBg.srcSet} sizes={desktopBg.sizes} />
+            <img
+              {...mobileBg}
+              alt=""
+              loading="eager"
+              fetchPriority={current === 0 ? "high" : "auto"}
+              className="object-cover object-[var(--hero-pos-m)] sm:object-[var(--hero-pos)]"
+              style={
+                {
+                  ...mobileBg.style,
+                  "--hero-pos": slide.objectPos,
+                  "--hero-pos-m": MOBILE_BG_POS,
+                } as React.CSSProperties
+              }
+            />
+          </picture>
           {/* Left-to-right gradient: solid on left for text, clears on right so face is visible */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 hidden sm:block"
             style={{
               background:
                 "linear-gradient(to right, #0C2D5A 28%, rgba(12,45,90,0.80) 43%, rgba(12,45,90,0.15) 61%, transparent 78%)",
+            }}
+          />
+          {/* Phones: text covers the full width, so a top-to-bottom navy gradient — strongest
+              behind the heading and paragraph, lighter where the site shows between the buttons */}
+          <div
+            className="absolute inset-0 sm:hidden"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(12,45,90,0.9) 0%, rgba(12,45,90,0.78) 40%, rgba(12,45,90,0.55) 70%, rgba(12,45,90,0.8) 100%)",
             }}
           />
         </motion.div>
