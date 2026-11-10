@@ -61,10 +61,10 @@ export default function ServicesPage() {
               <span className="h-px w-8 bg-blue-400" />
               <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">Services</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 className="text-[1.875rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
               Approval, Certification & Compliance Services
             </h1>
-            <p className="text-blue-100 text-xl leading-relaxed max-w-2xl">
+            <p className="text-blue-100 text-base leading-[1.65] sm:text-xl sm:leading-relaxed max-w-2xl">
               From early planning advice and approval package reviews through to certification
               and final occupation — practical support at every stage across NSW.
             </p>

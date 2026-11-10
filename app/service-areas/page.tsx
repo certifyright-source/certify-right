@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { ArrowRight, MapPin, CheckCircle2 } from "lucide-react";
 import CTASection from "@/components/home/CTASection";
+import PageHeroBackground from "@/components/layout/PageHeroBackground";
 
 export const metadata: Metadata = {
   title: "Service Areas — NSW Approvals, Certification & Compliance",
@@ -38,43 +39,34 @@ export default function ServiceAreasPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-[#0C2D5A] min-h-[70vh] overflow-hidden">
-        {/* Background photo — Fadi with Sydney skyline */}
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image
-            src="/images/hero-2.webp"
-            alt=""
-            fill
-            className="object-cover"
-            style={{ objectPosition: "60% center" }}
-            preload
-            sizes="100vw"
-          />
-          {/* Left-to-right gradient: dark behind text, clears on right so Fadi is visible */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to right, #0C2D5A 28%, rgba(12,45,90,0.80) 43%, rgba(12,45,90,0.15) 61%, transparent 78%)",
-            }}
-          />
-        </div>
+      <section
+        className="relative bg-[#0C2D5A] sm:min-h-[70vh] overflow-hidden"
+        style={{ "--hero-img-h": "86vw" } as CSSProperties}
+      >
+        {/* Background photo — Fadi with Sydney skyline (phones: photo band below the text) */}
+        <PageHeroBackground
+          src="/images/hero-2.webp"
+          position="60% center"
+          mobilePosition="72% center"
+          mobileFace="47% 25%"
+          preload
+        />
         {/* Content — matches homepage hero container/alignment pattern */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="min-h-[70vh] py-20 lg:py-24 flex flex-col justify-center">
+          <div className="pt-12 pb-[calc(var(--hero-img-h)-0.5rem)] sm:min-h-[70vh] sm:py-20 lg:py-24 flex flex-col justify-center">
             <div className="max-w-2xl">
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-px w-8 bg-blue-400" />
                 <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">Service Areas</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              <h1 className="text-[1.75rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
                 Approvals, Certification & Compliance — Greater Sydney & Beyond
               </h1>
-              <p className="text-blue-100 text-xl leading-relaxed">
+              <p className="text-blue-100 text-base leading-[1.65] sm:text-xl sm:leading-relaxed">
                 Based in Austral, Certify Right helps clients navigate planning, certification,
                 compliance and approvals across Greater Sydney and regional NSW. Contact us to confirm coverage for your location.
               </p>
-              <div className="flex items-center gap-2 mt-6 text-blue-200">
+              <div className="flex items-center gap-2 mt-5 sm:mt-6 text-blue-200">
                 <MapPin className="w-4 h-4 flex-shrink-0" />
                 <span className="text-sm">Head office: Austral, NSW 2179, Australia</span>
               </div>

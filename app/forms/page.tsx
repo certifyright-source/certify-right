@@ -83,10 +83,10 @@ export default function FormsPage() {
                   Forms & Downloads
                 </span>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              <h1 className="text-[1.875rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
                 Forms & Documents
               </h1>
-              <p className="text-blue-100 text-lg sm:text-xl leading-relaxed mb-8">
+              <p className="text-blue-100 text-base leading-[1.65] sm:text-xl sm:leading-relaxed mb-7 sm:mb-8">
                 Download the forms you need to appoint your Principal Certifier and apply for
                 your Occupation Certificate — ready to complete, sign and send back to us.
               </p>

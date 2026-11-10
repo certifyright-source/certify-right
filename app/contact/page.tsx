@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import type { CSSProperties } from "react";
 import ContactForm from "@/components/ui/ContactForm";
+import PageHeroBackground from "@/components/layout/PageHeroBackground";
 import { Phone, Mail, MapPin, Clock, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -53,36 +54,29 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-[#0C2D5A] min-h-[70vh] lg:min-h-[82vh] overflow-hidden">
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image
-            src="/images/contact-hero.webp"
-            alt=""
-            fill
-            className="object-cover"
-            style={{ objectPosition: "65% 20%" }}
-            preload
-            sizes="100vw"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to right, #0C2D5A 28%, rgba(12,45,90,0.80) 43%, rgba(12,45,90,0.15) 61%, transparent 78%)",
-            }}
-          />
-        </div>
+      <section
+        className="relative bg-[#0C2D5A] sm:min-h-[70vh] lg:min-h-[82vh] overflow-hidden"
+        style={{ "--hero-img-h": "96vw" } as CSSProperties}
+      >
+        {/* Phones: a taller photo band so Fadi shows head to waist */}
+        <PageHeroBackground
+          src="/images/contact-hero.webp"
+          position="65% 20%"
+          mobilePosition="100% center"
+          mobileFace="52% 20%"
+          preload
+        />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="min-h-[70vh] lg:min-h-[82vh] py-20 lg:py-24 flex flex-col justify-center">
+          <div className="pt-12 pb-[calc(var(--hero-img-h)-0.5rem)] sm:min-h-[70vh] lg:min-h-[82vh] sm:py-20 lg:py-24 flex flex-col justify-center">
             <div className="max-w-xl lg:max-w-[600px]">
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-px w-8 bg-blue-400" />
                 <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">Contact</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              <h1 className="text-[1.875rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
                 Get a Quote
               </h1>
-              <p className="text-blue-100 text-xl leading-relaxed">
+              <p className="text-blue-100 text-base leading-[1.65] sm:text-xl sm:leading-relaxed">
                 Tell us about your project. We respond within 24 hours and provide
                 a quote promptly — you speak directly with Fadi.
               </p>

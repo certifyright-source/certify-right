@@ -76,9 +76,11 @@ const MOBILE_BG = "/images/hero-banner-3.webp";
 const MOBILE_BG_POS = "78% center";
 const MOBILE_BG_SIZES = "1600px";
 const MOBILE_BG_QUALITY = 90;
+// Desktop banners are shown close to full width, so request them at the higher allowed quality.
+const DESKTOP_BG_QUALITY = 90;
 
 const HEADLINE_CLASS =
-  "text-[2rem] sm:text-5xl lg:text-[3.25rem] xl:text-6xl font-bold text-white leading-[1.1] mb-5";
+  "text-[1.75rem] sm:text-5xl lg:text-[3.25rem] xl:text-6xl font-bold text-white leading-[1.1] mb-4 sm:mb-5";
 const CTA1_CLASS =
   "inline-flex items-center gap-2 bg-white text-[#0C2D5A] hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition-colors text-sm shadow-lg shadow-black/20";
 const CTA2_CLASS =
@@ -115,7 +117,9 @@ function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean
       </Heading>
 
       {/* Body */}
-      <p className="text-blue-100/90 text-base sm:text-lg leading-relaxed mb-8">{slide.body}</p>
+      <p className="text-blue-100/90 text-[0.9375rem] leading-[1.65] sm:text-lg sm:leading-relaxed mb-7 sm:mb-8">
+        {slide.body}
+      </p>
 
       <div>
         {/* CTAs */}
@@ -189,13 +193,26 @@ export default function HeroSlider() {
   }, [goNext, paused]);
 
   const slide = SLIDES[current];
-  const { props: desktopBg } = getImageProps({ src: slide.bg, alt: "", fill: true, sizes: "100vw" });
+  const { props: desktopBg } = getImageProps({
+    src: slide.bg,
+    alt: "",
+    fill: true,
+    sizes: "100vw",
+    quality: DESKTOP_BG_QUALITY,
+  });
   const { props: mobileBg } = getImageProps({
     src: MOBILE_BG,
     alt: "",
     fill: true,
     sizes: MOBILE_BG_SIZES,
     quality: MOBILE_BG_QUALITY,
+  });
+  // Small copy of the slide's banner for the blurred backdrop on wide screens (blur hides detail).
+  const { props: backdropBg } = getImageProps({
+    src: slide.bg,
+    alt: "",
+    width: 640,
+    height: 356,
   });
   const dy = reduced ? 0 : 18;
 
@@ -207,7 +224,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative bg-[#0C2D5A] min-h-[90vh] overflow-hidden"
+      className="relative bg-[#0C2D5A] min-h-[90vh] lg:min-h-0 overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={() => setPaused(true)}
@@ -227,6 +244,12 @@ export default function HeroSlider() {
         >
           {/* One <img>, art-directed: sm+ uses the slide's own banner (as before); phones use the
               shared construction-site banner. Each device downloads only the image it shows. */}
+          {/* Wide screens (xl+): the full banner is shown uncropped, so a blurred, darkened copy
+              fills any space around it. Not rendered below xl, so it never downloads there. */}
+          <div
+            className="absolute inset-0 hidden xl:block scale-110 blur-2xl brightness-[0.55] bg-cover bg-center"
+            style={{ backgroundImage: `url(${backdropBg.src})` }}
+          />
           <picture>
             <source media="(min-width: 640px)" srcSet={desktopBg.srcSet} sizes={desktopBg.sizes} />
             <img
@@ -234,7 +257,7 @@ export default function HeroSlider() {
               alt=""
               loading="eager"
               fetchPriority={current === 0 ? "high" : "auto"}
-              className="object-cover object-[var(--hero-pos-m)] sm:object-[var(--hero-pos)]"
+              className="object-cover object-[var(--hero-pos-m)] sm:object-[var(--hero-pos)] xl:object-contain xl:object-[right_bottom]"
               style={
                 {
                   ...mobileBg.style,
@@ -253,12 +276,15 @@ export default function HeroSlider() {
             }}
           />
           {/* Phones: text covers the full width, so a top-to-bottom navy gradient — strongest
-              behind the heading and paragraph, lighter where the site shows between the buttons */}
+              behind the heading and paragraph, easing off where the site and helmet show between
+              the buttons, then settling again at the foot behind the slider controls. A deep navy
+              (#112F59) gradient from the left fades to clear towards the right, and a soft
+              brand-blue glow lifts the top. */}
           <div
             className="absolute inset-0 sm:hidden"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(12,45,90,0.9) 0%, rgba(12,45,90,0.78) 40%, rgba(12,45,90,0.55) 70%, rgba(12,45,90,0.8) 100%)",
+                "radial-gradient(120% 40% at 92% 0%, rgba(24,95,165,0.3) 0%, rgba(24,95,165,0) 70%), linear-gradient(to right, rgba(17,47,89,0.6) 0%, rgba(17,47,89,0.38) 25%, rgba(17,47,89,0.14) 48%, rgba(17,47,89,0) 68%),linear-gradient(to bottom, rgba(12,45,90,0.9) 0%, rgba(12,45,90,0.86) 25%, rgba(12,45,90,0.76) 45%, rgba(12,45,90,0.6) 62%, rgba(12,45,90,0.5) 74%, rgba(12,45,90,0.62) 88%, rgba(12,45,90,0.82) 100%)",
             }}
           />
         </motion.div>
@@ -266,12 +292,13 @@ export default function HeroSlider() {
 
       {/* Main content — text on left, photo shows through on right */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="min-h-[90vh] py-12 sm:py-20 lg:py-24 flex flex-col justify-center">
+        <div className="min-h-[90vh] lg:min-h-0 py-12 sm:py-20 lg:py-12 flex flex-col justify-center">
 
           {/* Text block — constrained to left half on large screens */}
           <div className="max-w-xl lg:max-w-[600px]">
             {/* All slides share one grid cell: invisible copies reserve the tallest slide's
-                height, so the hero, buttons and controls never move between slides. */}
+                height, so the hero, buttons and controls never move between slides. On desktop the
+                visible slide is centred in that space, so shorter slides leave no gap below. */}
             <div className="grid">
               {SLIDES.map((s) => (
                 <div
@@ -285,7 +312,7 @@ export default function HeroSlider() {
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={`text-${current}`}
-                  className="flex flex-col [grid-area:1/1]"
+                  className="flex flex-col [grid-area:1/1] lg:self-center"
                   custom={direction}
                   variants={textVariants}
                   initial="enter"
@@ -299,7 +326,7 @@ export default function HeroSlider() {
             </div>
 
             {/* Slide controls */}
-            <div className="flex items-center gap-4 mt-12">
+            <div className="flex items-center gap-4 mt-12 lg:mt-8">
               <div className="flex items-center gap-2">
                 {SLIDES.map((_, i) => (
                   <button
