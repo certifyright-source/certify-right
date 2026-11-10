@@ -78,15 +78,21 @@ const MOBILE_BG_SIZES = "1600px";
 const MOBILE_BG_QUALITY = 90;
 // Desktop banners are shown close to full width, so request them at the higher allowed quality.
 const DESKTOP_BG_QUALITY = 90;
+// Short laptop screens (xl+): the shorter hero leaves the uncropped banner narrower than the
+// screen, so softly feather its left edge into the blurred backdrop instead of showing a hard seam.
+// The banners are 2000×1113, so the contained image starts 179.7cqh (its width) from the right.
+const HERO_EDGE_MASK =
+  "linear-gradient(to right, transparent calc(100% - 179.7cqh), #000 calc(100% - 179.7cqh + 160px))";
 
 const HEADLINE_CLASS =
-  "text-[1.75rem] sm:text-5xl lg:text-[3.25rem] xl:text-6xl font-bold text-white leading-[1.1] mb-4 sm:mb-5";
+  "text-[1.75rem] sm:text-5xl lg:text-[3.25rem] xl:text-6xl laptop:text-5xl laptop-short:text-[2.5rem] font-bold text-white leading-[1.1] mb-4 sm:mb-5 laptop:mb-4 laptop-short:mb-3";
 const CTA1_CLASS =
-  "inline-flex items-center gap-2 bg-white text-[#0C2D5A] hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition-colors text-sm shadow-lg shadow-black/20";
+  "inline-flex items-center gap-2 bg-white text-[#0C2D5A] hover:bg-blue-50 font-bold px-6 py-3.5 laptop-short:py-3 rounded-xl transition-colors text-sm shadow-lg shadow-black/20";
 const CTA2_CLASS =
-  "inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 hover:bg-white/5 text-white font-semibold px-6 py-3.5 rounded-xl transition-all text-sm";
+  "inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 hover:bg-white/5 text-white font-semibold px-6 py-3.5 laptop-short:py-3 rounded-xl transition-all text-sm";
 
-// One slide's text, top-aligned with natural spacing. `sizer` renders a non-interactive copy
+// One slide's text, top-aligned with natural spacing. On short laptop screens (`laptop` /
+// `laptop-short` variants in globals.css) type and gaps tighten so the whole hero fits the screen. `sizer` renders a non-interactive copy
 // (no h1 or links) used only to reserve the tallest slide's height.
 function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean }) {
   const Heading = sizer ? "div" : "h1";
@@ -100,7 +106,7 @@ function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean
   return (
     <>
       {/* Chip — reserves two lines on phones, where the longest chip wraps, so headlines line up */}
-      <div className="min-h-8 sm:min-h-0 mb-5">
+      <div className="min-h-8 sm:min-h-0 mb-5 laptop:mb-4 laptop-short:mb-3">
         <div className="flex items-center gap-3">
           <span className="h-px w-8 bg-blue-400 flex-shrink-0" />
           <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">
@@ -117,13 +123,13 @@ function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean
       </Heading>
 
       {/* Body */}
-      <p className="text-blue-100/90 text-[0.9375rem] leading-[1.65] sm:text-lg sm:leading-relaxed mb-7 sm:mb-8">
+      <p className="text-blue-100/90 text-[0.9375rem] leading-[1.65] sm:text-lg sm:leading-relaxed laptop:text-base laptop:leading-relaxed mb-7 sm:mb-8 laptop:mb-6 laptop-short:mb-5">
         {slide.body}
       </p>
 
       <div>
         {/* CTAs */}
-        <div className="flex flex-wrap gap-3 mb-8">
+        <div className="flex flex-wrap gap-3 mb-8 laptop:mb-6 laptop-short:mb-5">
           {sizer ? (
             <>
               <span className={CTA1_CLASS}>
@@ -235,7 +241,7 @@ export default function HeroSlider() {
       <AnimatePresence mode="sync">
         <motion.div
           key={`bg-${current}`}
-          className="absolute inset-0"
+          className="absolute inset-0 [container-type:size]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -257,12 +263,13 @@ export default function HeroSlider() {
               alt=""
               loading="eager"
               fetchPriority={current === 0 ? "high" : "auto"}
-              className="object-cover object-[var(--hero-pos-m)] sm:object-[var(--hero-pos)] xl:object-contain xl:object-[right_bottom]"
+              className="object-cover object-[var(--hero-pos-m)] sm:object-[var(--hero-pos)] xl:object-contain xl:object-[right_bottom] laptop:xl:[mask-image:var(--hero-edge)]"
               style={
                 {
                   ...mobileBg.style,
                   "--hero-pos": slide.objectPos,
                   "--hero-pos-m": MOBILE_BG_POS,
+                  "--hero-edge": HERO_EDGE_MASK,
                 } as React.CSSProperties
               }
             />
@@ -292,7 +299,7 @@ export default function HeroSlider() {
 
       {/* Main content — text on left, photo shows through on right */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="min-h-[90vh] lg:min-h-0 py-12 sm:py-20 lg:py-12 flex flex-col justify-center">
+        <div className="min-h-[90vh] lg:min-h-0 py-12 sm:py-20 lg:py-12 laptop:py-8 laptop-short:py-6 flex flex-col justify-center">
 
           {/* Text block — constrained to left half on large screens */}
           <div className="max-w-xl lg:max-w-[600px]">
@@ -326,7 +333,7 @@ export default function HeroSlider() {
             </div>
 
             {/* Slide controls */}
-            <div className="flex items-center gap-4 mt-12 lg:mt-8">
+            <div className="flex items-center gap-4 mt-12 lg:mt-8 laptop:mt-6 laptop-short:mt-5">
               <div className="flex items-center gap-2">
                 {SLIDES.map((_, i) => (
                   <button
