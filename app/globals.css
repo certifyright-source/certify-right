@@ -27,6 +27,11 @@
   --shadow-header: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.06);
 }
 
+/* Short laptop screens (e.g. 14" 1366×768): desktop layout, but too little height for the full
+   desktop hero. `laptop-short` is for the tightest browser windows (~650px tall or less). */
+@custom-variant laptop (@media (min-width: 1024px) and (max-height: 860px));
+@custom-variant laptop-short (@media (min-width: 1024px) and (max-height: 700px));
+
 /* Base styles */
 *,
 *::before,
