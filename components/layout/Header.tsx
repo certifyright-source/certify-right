@@ -28,6 +28,7 @@ const navLinks = [
   },
   { label: "Service Areas", href: "/service-areas" },
   { label: "FAQs", href: "/faqs" },
+  { label: "Forms", href: "/forms" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -156,7 +157,7 @@ export default function Header() {
 
               {/* Desktop nav */}
               <nav
-                className="hidden lg:flex items-center gap-1"
+                className="hidden lg:flex flex-1 justify-center items-center gap-1 mx-4"
                 aria-label="Main navigation"
               >
                 {navLinks.map((link) => {
@@ -172,7 +173,7 @@ export default function Header() {
                           onKeyDown={(e) => {
                             if (e.key === "Escape") setServicesOpen(false);
                           }}
-                          className={`flex items-center gap-1 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                          className={`flex items-center gap-1 px-2.5 xl:px-4 py-2 rounded-md text-sm whitespace-nowrap font-medium transition-colors ${
                             isActive(link.href)
                               ? "text-[#185FA5] bg-blue-50"
                               : "text-slate-700 hover:text-[#0C2D5A] hover:bg-slate-50"
@@ -225,7 +226,7 @@ export default function Header() {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                      className={`px-2.5 xl:px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
                         isActive(link.href)
                           ? "text-[#185FA5] bg-blue-50"
                           : "text-slate-700 hover:text-[#0C2D5A] hover:bg-slate-50"
@@ -238,15 +239,16 @@ export default function Header() {
               </nav>
 
               {/* Right: phone + CTA */}
-              <div className="hidden lg:flex items-center gap-4">
+              <div className="hidden lg:flex flex-shrink-0 items-center gap-4">
                 <a
                   href="tel:0423925514"
-                  className="flex items-center gap-2 text-slate-700 hover:text-[#0C2D5A] transition-colors"
+                  aria-label="Call Fadi on 0423 925 514"
+                  className="flex items-center gap-2 whitespace-nowrap text-slate-700 hover:text-[#0C2D5A] transition-colors"
                 >
                   <div className="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
                     <Phone className="w-3.5 h-3.5 text-[#185FA5]" />
                   </div>
-                  <div>
+                  <div className="hidden xl:block">
                     <div className="text-xs text-slate-500 leading-none mb-0.5">
                       Call Fadi
                     </div>
@@ -257,7 +259,7 @@ export default function Header() {
                 </a>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#185FA5] hover:bg-[#0C2D5A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 whitespace-nowrap bg-[#185FA5] hover:bg-[#0C2D5A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors"
                 >
                   Get a Quote
                   <ArrowRight className="w-4 h-4" />
