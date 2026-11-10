@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
     // Optimized images rarely change; cache them for 31 days so reloads are served from cache.
     // Renaming a file (e.g. .png -> .webp) changes its URL and bypasses any stale entry.
     minimumCacheTTL: 2678400,
+    // 75 is the default; 90 is used only by the phone hero background, which renders large.
+    qualities: [75, 90],
   },
 };
 

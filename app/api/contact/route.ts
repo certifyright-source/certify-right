@@ -11,7 +11,7 @@ import {
 
 export const runtime = "nodejs";
 
-const DEFAULT_TO = "certifyright@gmail.com";
+const DEFAULT_TO = "info@certifyright.com.au";
 
 function field(form: FormData, name: string) {
   const v = form.get(name);
