@@ -29,7 +29,7 @@ export default function ServiceAreasSection() {
             </h2>
             <div className="space-y-4 text-slate-600 leading-relaxed mb-6">
               <p>
-                Certify Right is based in Merrylands and services projects across Greater
+                Certify Right is based in Austral and services projects across Greater
                 Sydney and regional NSW. Whether your project is in the inner west, outer
                 suburbs, or beyond Sydney, we can help.
               </p>
@@ -40,7 +40,7 @@ export default function ServiceAreasSection() {
             </div>
             <div className="flex items-center gap-2 text-sm text-slate-500 mb-6">
               <MapPin className="w-4 h-4 text-[#185FA5] flex-shrink-0" />
-              <span>Head office: Merrylands NSW 2160</span>
+              <span>Head office: Austral, NSW 2179, Australia</span>
             </div>
             <Link
               href="/service-areas"

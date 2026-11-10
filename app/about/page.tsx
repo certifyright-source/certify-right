@@ -185,7 +185,7 @@ export default function AboutPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Location</span>
-                    <span className="text-[#0C2D5A] font-medium">Merrylands NSW 2160</span>
+                    <span className="text-[#0C2D5A] font-medium">Austral, NSW 2179, Australia</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Phone</span>

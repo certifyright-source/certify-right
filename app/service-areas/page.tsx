@@ -7,7 +7,7 @@ import CTASection from "@/components/home/CTASection";
 export const metadata: Metadata = {
   title: "Service Areas — NSW Approvals, Certification & Compliance",
   description:
-    "Certify Right provides planning advice, approvals, certification and compliance services across Greater Sydney and regional NSW. Based in Merrylands, we cover Parramatta, Blacktown, Liverpool, Campbelltown, Hills District, Inner West, Eastern Suburbs and more.",
+    "Certify Right provides planning advice, approvals, certification and compliance services across Greater Sydney and regional NSW. Based in Austral, we cover Parramatta, Blacktown, Liverpool, Campbelltown, Hills District, Inner West, Eastern Suburbs and more.",
   alternates: { canonical: "https://certifyright.com.au/service-areas" },
 };
 
@@ -71,12 +71,12 @@ export default function ServiceAreasPage() {
                 Approvals, Certification & Compliance — Greater Sydney & Beyond
               </h1>
               <p className="text-blue-100 text-xl leading-relaxed">
-                Based in Merrylands, Certify Right helps clients navigate planning, certification,
+                Based in Austral, Certify Right helps clients navigate planning, certification,
                 compliance and approvals across Greater Sydney and regional NSW. Contact us to confirm coverage for your location.
               </p>
               <div className="flex items-center gap-2 mt-6 text-blue-200">
                 <MapPin className="w-4 h-4 flex-shrink-0" />
-                <span className="text-sm">Head office: Merrylands NSW 2160</span>
+                <span className="text-sm">Head office: Austral, NSW 2179, Australia</span>
               </div>
             </div>
           </div>

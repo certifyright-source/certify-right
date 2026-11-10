@@ -156,7 +156,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <div className="text-xs text-blue-300 mb-0.5">Location</div>
-                    <div className="text-sm font-medium">Merrylands NSW 2160</div>
+                    <div className="text-sm font-medium">Austral, NSW 2179, Australia</div>
                   </div>
                 </div>
               </li>

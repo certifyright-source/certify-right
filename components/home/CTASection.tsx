@@ -46,7 +46,7 @@ export default function CTASection() {
           </a>
         </div>
         <p className="mt-6 text-blue-200 text-sm">
-          Fadi Habbouche · Registered Building Surveyor Class A3 · BDC2868 · Merrylands NSW
+          Fadi Habbouche · Registered Building Surveyor Class A3 · BDC2868 · Austral, NSW 2179, Australia
         </p>
       </div>
     </section>

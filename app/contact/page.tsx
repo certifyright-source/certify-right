@@ -28,7 +28,7 @@ const contactDetails = [
   {
     icon: MapPin,
     label: "Location",
-    value: "Merrylands NSW 2160",
+    value: "Austral, NSW 2179, Australia",
     sub: "Greater Sydney & NSW-wide",
     href: undefined,
   },
@@ -53,14 +53,14 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-[#0C2D5A] min-h-[70vh] overflow-hidden">
+      <section className="relative bg-[#0C2D5A] min-h-[70vh] lg:min-h-[82vh] overflow-hidden">
         <div className="absolute inset-0" aria-hidden="true">
           <Image
             src="/images/contact-hero.webp"
             alt=""
             fill
             className="object-cover"
-            style={{ objectPosition: "65% center" }}
+            style={{ objectPosition: "65% 20%" }}
             preload
             sizes="100vw"
           />
@@ -73,7 +73,7 @@ export default function ContactPage() {
           />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="min-h-[70vh] py-20 lg:py-24 flex flex-col justify-center">
+          <div className="min-h-[70vh] lg:min-h-[82vh] py-20 lg:py-24 flex flex-col justify-center">
             <div className="max-w-xl lg:max-w-[600px]">
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-px w-8 bg-blue-400" />
