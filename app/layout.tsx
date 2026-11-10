@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "fire safety certificate NSW",
     "Fadi Habbouche",
     "Certify Right",
-    "building certifier Merrylands",
+    "building certifier Austral",
     "building certifier Greater Sydney",
   ],
   authors: [{ name: "Certify Right" }],
