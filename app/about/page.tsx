@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -8,6 +8,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import CTASection from "@/components/home/CTASection";
+import PageHeroBackground from "@/components/layout/PageHeroBackground";
 
 export const metadata: Metadata = {
   title: "About Fadi Habbouche — NSW Registered Building Surveyor",
@@ -65,39 +66,30 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero — Fadi seated photo as background with text overlay */}
-      <section className="relative bg-[#0C2D5A] min-h-[70vh] overflow-hidden">
-        {/* Background: Fadi seated at desk */}
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image
-            src="/images/about-seated.webp"
-            alt=""
-            fill
-            className="object-cover"
-            style={{ objectPosition: "60% center" }}
-            preload
-            sizes="100vw"
-          />
-          {/* Left-to-right gradient: dark behind text, clears on right so Fadi remains visible */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to right, #0C2D5A 28%, rgba(12,45,90,0.80) 43%, rgba(12,45,90,0.15) 61%, transparent 78%)",
-            }}
-          />
-        </div>
+      <section
+        className="relative bg-[#0C2D5A] sm:min-h-[70vh] overflow-hidden"
+        style={{ "--hero-img-h": "84vw" } as CSSProperties}
+      >
+        {/* Background: Fadi seated at desk (phones: photo band below the text) */}
+        <PageHeroBackground
+          src="/images/about-seated.webp"
+          position="60% center"
+          mobilePosition="80% center"
+          mobileFace="58% 30%"
+          preload
+        />
         {/* Content — matches homepage hero container/alignment pattern */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="min-h-[70vh] py-20 lg:py-28 flex flex-col justify-center">
+          <div className="pt-12 pb-[calc(var(--hero-img-h)-0.5rem)] sm:min-h-[70vh] sm:py-20 lg:py-28 flex flex-col justify-center">
             <div className="max-w-xl lg:max-w-[600px]">
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-px w-8 bg-blue-400" />
                 <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">About</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              <h1 className="text-[1.875rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
                 Fadi Habbouche
               </h1>
-              <p className="text-blue-100 text-xl leading-relaxed">
+              <p className="text-blue-100 text-base leading-[1.65] sm:text-xl sm:leading-relaxed">
                 Registered Building Surveyor (Class A3). Civil/Design Engineer. Council
                 Compliance Officer. Fire Safety Professional. 15+ years of experience — and
                 the person you speak to directly.

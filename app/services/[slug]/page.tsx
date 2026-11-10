@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
+import type { CSSProperties } from "react";
+import PageHeroBackground from "@/components/layout/PageHeroBackground";
 import {
   ArrowRight,
   CheckCircle2,
@@ -54,50 +55,56 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// Phones show each banner in a band below the hero text; these keep each banner's subject in frame.
+const MOBILE_BANNER_POSITION: Record<string, string> = {
+  "complying-development-certificate": "100% center",
+  "construction-certificate": "98% center",
+  "occupation-certificate": "100% center",
+  "principal-certifier-appointment": "96% center",
+  "bca-ncc-compliance": "94% center",
+  "da-support": "92% center",
+  "demolition-certificate": "100% center",
+  "swimming-pool-compliance": "62% center",
+  "building-inspections": "90% center",
+  "fire-safety": "88% center",
+};
+
 export default async function ServicePage({ params }: Props) {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
   const Icon = iconMap[service.icon] || FileText;
+  const mobileBannerPos = MOBILE_BANNER_POSITION[service.slug] ?? "85% center";
   const relatedServices = services.filter((s) => s.id !== service.id).slice(0, 3);
 
   return (
     <>
       {/* Hero — banner image as background with text overlay */}
-      <section className="relative bg-[#0C2D5A] min-h-[70vh] overflow-hidden">
-        {/* Background banner image */}
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image
-            src={service.banner}
-            alt=""
-            fill
-            className="object-cover object-center"
-            preload
-            sizes="100vw"
-          />
-          {/* Left-to-right gradient: dark behind text, clears on right so image subject is visible */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to right, #0C2D5A 28%, rgba(12,45,90,0.80) 43%, rgba(12,45,90,0.15) 61%, transparent 78%)",
-            }}
-          />
-        </div>
+      <section
+        className="relative bg-[#0C2D5A] sm:min-h-[70vh] overflow-hidden"
+        style={{ "--hero-img-h": "72vw" } as CSSProperties}
+      >
+        {/* Background banner image (phones: photo band below the text) */}
+        <PageHeroBackground
+          src={service.banner}
+          position="center"
+          mobilePosition={mobileBannerPos}
+          preload
+        />
         {/* Content — matches homepage hero container/alignment pattern */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="min-h-[70vh] py-20 lg:py-24 flex flex-col justify-center">
+          <div className="pt-10 pb-[calc(var(--hero-img-h)-0.5rem)] sm:min-h-[70vh] sm:py-20 lg:py-24 flex flex-col justify-center">
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-blue-300 hover:text-white text-sm mb-8 transition-colors self-start"
+              className="inline-flex items-center gap-2 text-blue-300 hover:text-white text-sm mb-6 sm:mb-8 transition-colors self-start"
             >
               <ArrowLeft className="w-4 h-4" />
               All Services
             </Link>
             <div className="max-w-xl lg:max-w-[600px]">
-              <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-6 border border-white/15">
-                <Icon className="w-7 h-7 text-white" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/10 rounded-xl flex items-center justify-center mb-5 sm:mb-6 border border-white/15">
+                <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
               {service.featured && (
                 <div className="mb-3">
@@ -106,10 +113,10 @@ export default async function ServicePage({ params }: Props) {
                   </span>
                 </div>
               )}
-              <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight mb-5">
+              <h1 className="text-[1.875rem] sm:text-5xl font-bold text-white leading-tight mb-4 sm:mb-5">
                 {service.title}
               </h1>
-              <p className="text-blue-100 text-lg leading-relaxed mb-8">
+              <p className="text-blue-100 text-base leading-[1.65] sm:text-lg sm:leading-relaxed mb-7 sm:mb-8">
                 {service.tagline}
               </p>
               <div className="flex flex-wrap gap-4">
