@@ -67,10 +67,10 @@ export default function AboutPage() {
     <>
       {/* Hero — Fadi seated photo as background with text overlay */}
       <section
-        className="relative bg-[#0C2D5A] sm:min-h-[70vh] overflow-hidden"
-        style={{ "--hero-img-h": "84vw" } as CSSProperties}
+        className="relative bg-[#0C2D5A] lg:min-h-[70vh] overflow-hidden"
+        style={{ "--hero-img-h": "min(84vw, 600px)" } as CSSProperties}
       >
-        {/* Background: Fadi seated at desk (phones: photo band below the text) */}
+        {/* Background: Fadi seated at desk (phones and tablets: photo band below the text) */}
         <PageHeroBackground
           src="/images/about-seated.webp"
           position="60% center"
@@ -80,7 +80,7 @@ export default function AboutPage() {
         />
         {/* Content — matches homepage hero container/alignment pattern */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="pt-12 pb-[calc(var(--hero-img-h)-0.5rem)] sm:min-h-[70vh] sm:py-20 lg:py-28 flex flex-col justify-center">
+          <div className="pt-12 sm:pt-16 pb-[calc(var(--hero-img-h)-0.5rem)] lg:min-h-[70vh] lg:py-28 flex flex-col justify-center">
             <div className="max-w-xl lg:max-w-[600px]">
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-px w-8 bg-blue-400" />

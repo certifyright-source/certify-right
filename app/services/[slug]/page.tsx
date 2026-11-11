@@ -82,10 +82,10 @@ export default async function ServicePage({ params }: Props) {
     <>
       {/* Hero — banner image as background with text overlay */}
       <section
-        className="relative bg-[#0C2D5A] sm:min-h-[70vh] overflow-hidden"
-        style={{ "--hero-img-h": "72vw" } as CSSProperties}
+        className="relative bg-[#0C2D5A] lg:min-h-[70vh] overflow-hidden"
+        style={{ "--hero-img-h": "min(72vw, 520px)" } as CSSProperties}
       >
-        {/* Background banner image (phones: photo band below the text) */}
+        {/* Background banner image (phones and tablets: photo band below the text) */}
         <PageHeroBackground
           src={service.banner}
           position="center"
@@ -94,7 +94,7 @@ export default async function ServicePage({ params }: Props) {
         />
         {/* Content — matches homepage hero container/alignment pattern */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="pt-10 pb-[calc(var(--hero-img-h)-0.5rem)] sm:min-h-[70vh] sm:py-20 lg:py-24 flex flex-col justify-center">
+          <div className="pt-10 sm:pt-16 pb-[calc(var(--hero-img-h)-0.5rem)] lg:min-h-[70vh] lg:py-24 flex flex-col justify-center">
             <Link
               href="/services"
               className="inline-flex items-center gap-2 text-blue-300 hover:text-white text-sm mb-6 sm:mb-8 transition-colors self-start"
