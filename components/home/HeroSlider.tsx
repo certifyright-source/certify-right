@@ -5,9 +5,8 @@ import { getImageProps } from "next/image";
 import Link from "next/link";
 import {
   MOBILE_BASE,
-  MOBILE_BLEND,
-  MOBILE_TEXT_GLOW,
-  mobileFaceMask,
+  MOBILE_FADE_END,
+  mobileBlend,
 } from "@/components/layout/PageHeroBackground";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { CSSProperties } from "react";
@@ -35,14 +34,16 @@ interface SlideData {
   objectPos: string;
   /** Phones and tablets: object-position of the photo band below the text (before it is measured). */
   mobilePos: string;
-  /** Phones and tablets: face position within that band, kept clear of the navy blend. */
-  mobileFace?: string;
+  /**
+   * Phones and tablets: where the navy fade over the photo ends (share of the band's height),
+   * just above the person's head so the face is never tinted.
+   */
+  mobileFadeEnd?: string;
   /**
    * Phones and tablets: the point to keep in frame, as fractions of the image ([x, y]). Once the band is
-   * measured the photo is framed around it, and `isFace` keeps the navy blend off it.
+   * measured the photo is framed around it.
    */
   focus: [number, number];
-  isFace: boolean;
 }
 
 const SLIDES: SlideData[] = [
@@ -59,9 +60,8 @@ const SLIDES: SlideData[] = [
     bg: "/images/hero-banner-1.webp",
     objectPos: "90% 30%",
     mobilePos: "100% center",
-    mobileFace: "73% 36%",
+    mobileFadeEnd: "26%",
     focus: [0.81, 0.36],
-    isFace: true,
   },
   {
     id: 1,
@@ -74,9 +74,8 @@ const SLIDES: SlideData[] = [
     bg: "/images/hero-banner-2.webp",
     objectPos: "60% 30%",
     mobilePos: "100% center",
-    mobileFace: "53% 33%",
+    mobileFadeEnd: "18%",
     focus: [0.67, 0.33],
-    isFace: true,
   },
   {
     id: 2,
@@ -90,7 +89,6 @@ const SLIDES: SlideData[] = [
     objectPos: "95% center",
     mobilePos: "78% center",
     focus: [0.75, 0.65],
-    isFace: false,
   },
 ];
 
@@ -106,10 +104,9 @@ const AUTO_MS = 6000;
 // and slider controls. This is its height under the longest slide; shorter slides start it
 // higher.
 const MOBILE_IMG_H = "min(80vw, 500px)";
-// Phones and tablets: gap from the slide text to the controls, and the controls height.
-const CTRL_GAP = 32;
-const CTRL_H = 36;
-const BAND_GAP = 8;
+// Phones and tablets: the photo band starts this far below the slide text. The slider controls
+// sit on the band's solid-navy top edge, so there is no empty navy strip above the photo.
+const BAND_GAP = 24;
 // Banner aspect ratio (all three are 2000×1113).
 const BG_ASPECT = 2000 / 1113;
 
@@ -118,9 +115,8 @@ interface MobileBand {
   ctrlTop: number;
   /** Photo band height. */
   h: number;
-  /** object-position and face position that frame the slide's focus point in the band. */
+  /** object-position that frames the slide's focus point in the band. */
   pos: string;
-  face?: string;
 }
 
 // Frame the focus point (image fractions) in a w×h band, as object-cover would show it.
@@ -134,14 +130,7 @@ function frameBand(slide: SlideData, w: number, h: number, ctrlTop: number): Mob
   const offY = ih > h ? clamp(0.42 * h - slide.focus[1] * ih, h - ih, 0) : 0;
   const posX = iw > w ? (offX / (w - iw)) * 100 : 50;
   const posY = ih > h ? (offY / (h - ih)) * 100 : 50;
-  const fx = ((slide.focus[0] * iw + offX) / w) * 100;
-  const fy = ((slide.focus[1] * ih + offY) / h) * 100;
-  return {
-    ctrlTop,
-    h,
-    pos: `${posX.toFixed(1)}% ${posY.toFixed(1)}%`,
-    face: slide.isFace ? `${fx.toFixed(1)}% ${fy.toFixed(1)}%` : undefined,
-  };
+  return { ctrlTop, h, pos: `${posX.toFixed(1)}% ${posY.toFixed(1)}%` };
 }
 // Banners are shown close to full width (and ~2.4× the screen width in the phone band), so
 // request them at the higher allowed quality.
@@ -301,7 +290,7 @@ export default function HeroSlider() {
       const textEndY = textEnd.getBoundingClientRect().bottom;
       // Controls are positioned within the text block; the band within the hero.
       const ctrlTop = Math.round(textEndY - text.getBoundingClientRect().top);
-      const bandTop = Math.round(textEndY - section.getBoundingClientRect().top) + CTRL_GAP + CTRL_H + BAND_GAP;
+      const bandTop = Math.round(textEndY - section.getBoundingClientRect().top) + BAND_GAP;
       const w = section.clientWidth;
       const h = Math.round(section.clientHeight - bandTop);
       setBand(frameBand(SLIDES[current], w, h, ctrlTop));
@@ -324,7 +313,6 @@ export default function HeroSlider() {
     sizes: "(max-width: 1023px) 240vw, 100vw",
     quality: BG_QUALITY,
   });
-  const faceMask = mobileFaceMask(band ? band.face : slide.mobileFace);
   // Small copy of the slide's banner for the blurred backdrop on wide screens (blur hides detail).
   const { props: backdropBg } = getImageProps({
     src: slide.bg,
@@ -362,11 +350,6 @@ export default function HeroSlider() {
           transition={{ duration: 0.8 }}
           aria-hidden="true"
         >
-          {/* Phones and tablets: a soft brand-blue glow behind the text, from the top-right corner. */}
-          <div
-            className="absolute inset-0 lg:hidden"
-            style={{ background: MOBILE_TEXT_GLOW }}
-          />
           {/* Wide screens (xl+): the full banner is shown uncropped, so a blurred, darkened copy
               fills any space around it. Not rendered below xl, so it never downloads there. */}
           <div
@@ -403,17 +386,12 @@ export default function HeroSlider() {
                   "linear-gradient(to right, #0C2D5A 28%, rgba(12,45,90,0.80) 43%, rgba(12,45,90,0.15) 61%, transparent 78%)",
               }}
             />
-            {/* Phones and tablets: the same gradient turned vertical (navy from the text area fading down
-                into the photo, masked clear around the face), plus a light navy foot. */}
+            {/* Phones and tablets: the same gradient turned vertical (solid navy from the text area
+                fading evenly down into the photo, ending above the face), plus a light navy foot. */}
             <div className="absolute inset-0 lg:hidden" style={{ background: MOBILE_BASE }} />
             <div
               className="absolute inset-0 lg:hidden"
-              style={{
-                top: -2,
-                background: MOBILE_BLEND,
-                maskImage: faceMask,
-                WebkitMaskImage: faceMask,
-              }}
+              style={{ top: -2, background: mobileBlend(slide.mobileFadeEnd ?? MOBILE_FADE_END) }}
             />
           </div>
         </motion.div>

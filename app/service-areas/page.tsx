@@ -48,7 +48,7 @@ export default function ServiceAreasPage() {
           src="/images/hero-2.webp"
           position="60% center"
           mobilePosition="72% center"
-          mobileFace="47% 25%"
+          mobileFadeEnd="15%"
           preload
         />
         {/* Content — matches homepage hero container/alignment pattern */}

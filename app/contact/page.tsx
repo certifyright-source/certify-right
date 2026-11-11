@@ -58,12 +58,12 @@ export default function ContactPage() {
         className="relative bg-[#0C2D5A] lg:min-h-[82vh] overflow-hidden"
         style={{ "--hero-img-h": "min(96vw, 680px)" } as CSSProperties}
       >
-        {/* Project consultation scene (no people): site plans and a laptop on a desk in front of
-            a modern home. Phones and tablets: photo band below the text. */}
+        {/* Contact Us banner (no people): a modern build and frame under construction, with plans
+            and a Certify Right hard hat. Phones and tablets: photo band below the text. */}
         <PageHeroBackground
-          src="/images/services/da-support.webp"
-          position="right center"
-          mobilePosition="76% center"
+          src="/images/contact-us-banner.png"
+          position="70% center"
+          mobilePosition="72% center"
           preload
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
