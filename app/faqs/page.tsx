@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { faqs } from "@/data/faqs";
-import FaqHeroSlider from "@/components/faq/FaqHeroSlider";
+import FaqHero from "@/components/faq/FaqHero";
 
 const categories = ["All", "General", "CDC", "Inspections"] as const;
 type Category = (typeof categories)[number];
@@ -31,7 +31,7 @@ export default function FAQsPage() {
 
   return (
     <>
-      <FaqHeroSlider />
+      <FaqHero />
 
       {/* FAQ content */}
       <section className="py-20 lg:py-24 bg-white">

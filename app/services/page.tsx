@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -16,6 +17,7 @@ import {
 import { services } from "@/data/services";
 import CTASection from "@/components/home/CTASection";
 import ApprovalExpertiseSection from "@/components/home/ApprovalExpertiseSection";
+import PageHeroBackground from "@/components/layout/PageHeroBackground";
 
 export const metadata: Metadata = {
   title: "Approval, Certification & Compliance Services — NSW",
@@ -44,30 +46,33 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#0C2D5A] py-20 lg:py-28 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.04]" aria-hidden="true">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#g)" />
-          </svg>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="h-px w-8 bg-blue-400" />
-              <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">Services</span>
+      <section
+        className="relative bg-[#0C2D5A] lg:min-h-[70vh] overflow-hidden"
+        style={{ "--hero-img-h": "min(78vw, 560px)" } as CSSProperties}
+      >
+        {/* Background: residential construction site with the Sydney skyline (phones: photo
+            band below the text) */}
+        <PageHeroBackground
+          src="/images/hero-banner-3.webp"
+          position="90% center"
+          mobilePosition="78% center"
+          preload
+        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="pt-12 sm:pt-16 pb-[calc(var(--hero-img-h)-0.5rem)] lg:min-h-[70vh] lg:py-24 flex flex-col justify-center">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="h-px w-8 bg-blue-400" />
+                <span className="text-blue-300 text-xs font-semibold tracking-widest uppercase">Services</span>
+              </div>
+              <h1 className="text-[1.875rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
+                Approval, Certification & Compliance Services
+              </h1>
+              <p className="text-blue-100 text-base leading-[1.65] sm:text-xl sm:leading-relaxed">
+                From early planning advice and approval package reviews through to certification
+                and final occupation — practical support at every stage across NSW.
+              </p>
             </div>
-            <h1 className="text-[1.875rem] sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6">
-              Approval, Certification & Compliance Services
-            </h1>
-            <p className="text-blue-100 text-base leading-[1.65] sm:text-xl sm:leading-relaxed max-w-2xl">
-              From early planning advice and approval package reviews through to certification
-              and final occupation — practical support at every stage across NSW.
-            </p>
           </div>
         </div>
       </section>

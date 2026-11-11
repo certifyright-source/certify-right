@@ -55,19 +55,19 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <section
-        className="relative bg-[#0C2D5A] sm:min-h-[70vh] lg:min-h-[82vh] overflow-hidden"
-        style={{ "--hero-img-h": "96vw" } as CSSProperties}
+        className="relative bg-[#0C2D5A] lg:min-h-[82vh] overflow-hidden"
+        style={{ "--hero-img-h": "min(96vw, 680px)" } as CSSProperties}
       >
-        {/* Phones: a taller photo band so Fadi shows head to waist */}
+        {/* Project consultation scene (no people): site plans and a laptop on a desk in front of
+            a modern home. Phones and tablets: photo band below the text. */}
         <PageHeroBackground
-          src="/images/contact-hero.webp"
-          position="65% 20%"
-          mobilePosition="100% center"
-          mobileFace="52% 20%"
+          src="/images/services/da-support.webp"
+          position="right center"
+          mobilePosition="76% center"
           preload
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="pt-12 pb-[calc(var(--hero-img-h)-0.5rem)] sm:min-h-[70vh] lg:min-h-[82vh] sm:py-20 lg:py-24 flex flex-col justify-center">
+          <div className="pt-12 sm:pt-16 pb-[calc(var(--hero-img-h)-0.5rem)] lg:min-h-[82vh] lg:py-24 flex flex-col justify-center">
             <div className="max-w-xl lg:max-w-[600px]">
               <div className="flex items-center gap-2 mb-4">
                 <span className="h-px w-8 bg-blue-400" />

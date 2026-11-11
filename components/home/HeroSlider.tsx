@@ -1,9 +1,16 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { getImageProps } from "next/image";
 import Link from "next/link";
+import {
+  MOBILE_BASE,
+  MOBILE_BLEND,
+  MOBILE_TEXT_GLOW,
+  mobileFaceMask,
+} from "@/components/layout/PageHeroBackground";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import type { CSSProperties } from "react";
 import {
   ArrowRight,
   Phone,
@@ -20,10 +27,22 @@ interface SlideData {
   headline: string;
   accent: string;
   body: string;
+  /** Shorter description for phones (below 768px); `body` is shown from md (768px) up. */
+  mobileBody?: string;
   cta1: { label: string; href: string };
   cta2: { label: string; href: string; phone?: boolean };
   bg: string;
   objectPos: string;
+  /** Phones and tablets: object-position of the photo band below the text (before it is measured). */
+  mobilePos: string;
+  /** Phones and tablets: face position within that band, kept clear of the navy blend. */
+  mobileFace?: string;
+  /**
+   * Phones and tablets: the point to keep in frame, as fractions of the image ([x, y]). Once the band is
+   * measured the photo is framed around it, and `isFace` keeps the navy blend off it.
+   */
+  focus: [number, number];
+  isFace: boolean;
 }
 
 const SLIDES: SlideData[] = [
@@ -32,11 +51,17 @@ const SLIDES: SlideData[] = [
     chip: "NSW Approvals, Certification & Compliance",
     headline: "More Than a Certifier.",
     accent: "Your Approval & Compliance Partner.",
+    mobileBody:
+      "Expert guidance for building approvals, certification and compliance across NSW — making your project simpler from start to finish.",
     body: "Helping homeowners, builders, architects and developers navigate planning, certification, fire safety and compliance across NSW. From planning advice and approval package reviews through to certification and final occupation, we provide practical guidance, responsive communication and a clear path forward.",
     cta1: { label: "Get a Quote Within 24 Hours", href: "/contact" },
     cta2: { label: "0423 925 514", href: "tel:0423925514", phone: true },
     bg: "/images/hero-banner-1.webp",
     objectPos: "90% 30%",
+    mobilePos: "100% center",
+    mobileFace: "73% 36%",
+    focus: [0.81, 0.36],
+    isFace: true,
   },
   {
     id: 1,
@@ -48,6 +73,10 @@ const SLIDES: SlideData[] = [
     cta2: { label: "Call Fadi", href: "tel:0423925514", phone: true },
     bg: "/images/hero-banner-2.webp",
     objectPos: "60% 30%",
+    mobilePos: "100% center",
+    mobileFace: "53% 33%",
+    focus: [0.67, 0.33],
+    isFace: true,
   },
   {
     id: 2,
@@ -59,6 +88,9 @@ const SLIDES: SlideData[] = [
     cta2: { label: "Service Areas", href: "/service-areas" },
     bg: "/images/hero-banner-3.webp",
     objectPos: "95% center",
+    mobilePos: "78% center",
+    focus: [0.75, 0.65],
+    isFace: false,
   },
 ];
 
@@ -70,30 +102,72 @@ const TRUST_BADGES = [
 
 const AUTO_MS = 6000;
 
-// Phones (< 640px) show one full-hero background on every slide: the construction-site banner.
-// The tall hero renders it ~1.8× the screen width, so request the full 2000px source.
-const MOBILE_BG = "/images/hero-banner-3.webp";
-const MOBILE_BG_POS = "78% center";
-const MOBILE_BG_SIZES = "1600px";
-const MOBILE_BG_QUALITY = 90;
-// Desktop banners are shown close to full width, so request them at the higher allowed quality.
-const DESKTOP_BG_QUALITY = 90;
-// Short laptop screens (xl+): the shorter hero leaves the uncropped banner narrower than the
-// screen, so softly feather its left edge into the blurred backdrop instead of showing a hard seam.
+// Phones and tablets (< 1024px): each slide's own banner sits in a photo band below the text
+// and slider controls. This is its height under the longest slide; shorter slides start it
+// higher.
+const MOBILE_IMG_H = "min(80vw, 500px)";
+// Phones and tablets: gap from the slide text to the controls, and the controls height.
+const CTRL_GAP = 32;
+const CTRL_H = 36;
+const BAND_GAP = 8;
+// Banner aspect ratio (all three are 2000×1113).
+const BG_ASPECT = 2000 / 1113;
+
+interface MobileBand {
+  /** Top of the slider controls, from the top of the text block. */
+  ctrlTop: number;
+  /** Photo band height. */
+  h: number;
+  /** object-position and face position that frame the slide's focus point in the band. */
+  pos: string;
+  face?: string;
+}
+
+// Frame the focus point (image fractions) in a w×h band, as object-cover would show it.
+function frameBand(slide: SlideData, w: number, h: number, ctrlTop: number): MobileBand {
+  const scale = Math.max(w / BG_ASPECT, h);
+  const iw = scale * BG_ASPECT;
+  const ih = scale;
+  const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+  // Put the focus a little right of centre (text reads from the left) and in the upper half.
+  const offX = iw > w ? clamp(0.6 * w - slide.focus[0] * iw, w - iw, 0) : 0;
+  const offY = ih > h ? clamp(0.42 * h - slide.focus[1] * ih, h - ih, 0) : 0;
+  const posX = iw > w ? (offX / (w - iw)) * 100 : 50;
+  const posY = ih > h ? (offY / (h - ih)) * 100 : 50;
+  const fx = ((slide.focus[0] * iw + offX) / w) * 100;
+  const fy = ((slide.focus[1] * ih + offY) / h) * 100;
+  return {
+    ctrlTop,
+    h,
+    pos: `${posX.toFixed(1)}% ${posY.toFixed(1)}%`,
+    face: slide.isFace ? `${fx.toFixed(1)}% ${fy.toFixed(1)}%` : undefined,
+  };
+}
+// Banners are shown close to full width (and ~2.4× the screen width in the phone band), so
+// request them at the higher allowed quality.
+const BG_QUALITY = 90;
+// Wide screens (xl+): when the hero is short for its width, the uncropped banner is narrower
+// than the screen, so softly feather its left edge into the blurred backdrop (no hard seam).
 // The banners are 2000×1113, so the contained image starts 179.7cqh (its width) from the right.
 const HERO_EDGE_MASK =
   "linear-gradient(to right, transparent calc(100% - 179.7cqh), #000 calc(100% - 179.7cqh + 160px))";
 
-const HEADLINE_CLASS =
-  "text-[1.75rem] sm:text-5xl lg:text-[3.25rem] xl:text-6xl laptop:text-5xl laptop-short:text-[2.5rem] font-bold text-white leading-[1.1] mb-4 sm:mb-5 laptop:mb-4 laptop-short:mb-3";
+const HEADLINE_BASE =
+  "font-bold text-white leading-[1.1] mb-4 sm:mb-5 laptop:mb-4 laptop-short:mb-3";
+const HEADLINE_SIZE =
+  "text-[1.75rem] sm:text-5xl lg:text-[3.25rem] xl:text-6xl laptop:text-5xl laptop-short:text-[2.5rem]";
+// Slide 1 has the longest headline, so on desktop it is set slightly smaller.
+const HEADLINE_SIZE_LONG =
+  "text-[1.75rem] sm:text-5xl lg:text-[3rem] xl:text-[3.375rem] laptop:text-[2.75rem] laptop-short:text-[2.375rem]";
 const CTA1_CLASS =
   "inline-flex items-center gap-2 bg-white text-[#0C2D5A] hover:bg-blue-50 font-bold px-6 py-3.5 laptop-short:py-3 rounded-xl transition-colors text-sm shadow-lg shadow-black/20";
 const CTA2_CLASS =
   "inline-flex items-center gap-2 border-2 border-white/30 hover:border-white/60 hover:bg-white/5 text-white font-semibold px-6 py-3.5 laptop-short:py-3 rounded-xl transition-all text-sm";
 
 // One slide's text, top-aligned with natural spacing. On short laptop screens (`laptop` /
-// `laptop-short` variants in globals.css) type and gaps tighten so the whole hero fits the screen. `sizer` renders a non-interactive copy
-// (no h1 or links) used only to reserve the tallest slide's height.
+// `laptop-short` variants in globals.css) type and gaps tighten so the whole hero fits the
+// screen. `sizer` renders a non-interactive copy (no h1 or links) used only to reserve the
+// tallest slide's height.
 function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean }) {
   const Heading = sizer ? "div" : "h1";
   const cta2Content = (
@@ -116,7 +190,7 @@ function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean
       </div>
 
       {/* Headline */}
-      <Heading className={HEADLINE_CLASS}>
+      <Heading className={`${slide.id === 0 ? HEADLINE_SIZE_LONG : HEADLINE_SIZE} ${HEADLINE_BASE}`}>
         {slide.headline}
         <br />
         <span className="text-blue-300">{slide.accent}</span>
@@ -124,12 +198,19 @@ function SlideText({ slide, sizer = false }: { slide: SlideData; sizer?: boolean
 
       {/* Body */}
       <p className="text-blue-100/90 text-[0.9375rem] leading-[1.65] sm:text-lg sm:leading-relaxed laptop:text-base laptop:leading-relaxed mb-7 sm:mb-8 laptop:mb-6 laptop-short:mb-5">
-        {slide.body}
+        {slide.mobileBody ? (
+          <>
+            <span className="md:hidden">{slide.mobileBody}</span>
+            <span className="hidden md:inline">{slide.body}</span>
+          </>
+        ) : (
+          slide.body
+        )}
       </p>
 
       <div>
         {/* CTAs */}
-        <div className="flex flex-wrap gap-3 mb-8 laptop:mb-6 laptop-short:mb-5">
+        <div className="flex flex-wrap gap-3 mb-6 md:mb-8 laptop:mb-6 laptop-short:mb-5">
           {sizer ? (
             <>
               <span className={CTA1_CLASS}>
@@ -198,21 +279,52 @@ export default function HeroSlider() {
     return () => clearInterval(id);
   }, [goNext, paused]);
 
+  // Phones and tablets: start the photo band right under the current slide's text, so slides with less
+  // text show more photo instead of an empty navy gap. Measured from that slide's invisible
+  // sizer copy, which has the same layout but never animates. The hero's height stays fixed.
+  const sectionRef = useRef<HTMLElement>(null);
+  const sizerRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const textRef = useRef<HTMLDivElement>(null);
+  const [band, setBand] = useState<MobileBand | null>(null);
+  useEffect(() => {
+    const section = sectionRef.current;
+    const text = textRef.current;
+    const sizer = sizerRefs.current[current];
+    if (!section || !text || !sizer) return;
+    const phone = window.matchMedia("(max-width: 1023px)");
+    const measure = () => {
+      const textEnd = sizer.lastElementChild;
+      if (!phone.matches || !textEnd) {
+        setBand(null);
+        return;
+      }
+      const textEndY = textEnd.getBoundingClientRect().bottom;
+      // Controls are positioned within the text block; the band within the hero.
+      const ctrlTop = Math.round(textEndY - text.getBoundingClientRect().top);
+      const bandTop = Math.round(textEndY - section.getBoundingClientRect().top) + CTRL_GAP + CTRL_H + BAND_GAP;
+      const w = section.clientWidth;
+      const h = Math.round(section.clientHeight - bandTop);
+      setBand(frameBand(SLIDES[current], w, h, ctrlTop));
+    };
+    const ro = new ResizeObserver(measure);
+    ro.observe(section);
+    ro.observe(sizer);
+    phone.addEventListener("change", measure);
+    return () => {
+      ro.disconnect();
+      phone.removeEventListener("change", measure);
+    };
+  }, [current]);
+
   const slide = SLIDES[current];
-  const { props: desktopBg } = getImageProps({
+  const { props: bgImg } = getImageProps({
     src: slide.bg,
     alt: "",
     fill: true,
-    sizes: "100vw",
-    quality: DESKTOP_BG_QUALITY,
+    sizes: "(max-width: 1023px) 240vw, 100vw",
+    quality: BG_QUALITY,
   });
-  const { props: mobileBg } = getImageProps({
-    src: MOBILE_BG,
-    alt: "",
-    fill: true,
-    sizes: MOBILE_BG_SIZES,
-    quality: MOBILE_BG_QUALITY,
-  });
+  const faceMask = mobileFaceMask(band ? band.face : slide.mobileFace);
   // Small copy of the slide's banner for the blurred backdrop on wide screens (blur hides detail).
   const { props: backdropBg } = getImageProps({
     src: slide.bg,
@@ -230,7 +342,9 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative bg-[#0C2D5A] min-h-[90vh] lg:min-h-0 overflow-hidden"
+      ref={sectionRef}
+      className="relative bg-[#0C2D5A] overflow-hidden"
+      style={{ "--hero-img-h": MOBILE_IMG_H } as CSSProperties}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={() => setPaused(true)}
@@ -248,61 +362,69 @@ export default function HeroSlider() {
           transition={{ duration: 0.8 }}
           aria-hidden="true"
         >
-          {/* One <img>, art-directed: sm+ uses the slide's own banner (as before); phones use the
-              shared construction-site banner. Each device downloads only the image it shows. */}
+          {/* Phones and tablets: a soft brand-blue glow behind the text, from the top-right corner. */}
+          <div
+            className="absolute inset-0 lg:hidden"
+            style={{ background: MOBILE_TEXT_GLOW }}
+          />
           {/* Wide screens (xl+): the full banner is shown uncropped, so a blurred, darkened copy
               fills any space around it. Not rendered below xl, so it never downloads there. */}
           <div
             className="absolute inset-0 hidden xl:block scale-110 blur-2xl brightness-[0.55] bg-cover bg-center"
             style={{ backgroundImage: `url(${backdropBg.src})` }}
           />
-          <picture>
-            <source media="(min-width: 640px)" srcSet={desktopBg.srcSet} sizes={desktopBg.sizes} />
+          {/* The slide's own banner. Desktop (lg+): fills the whole hero. Below lg: a photo band below the text. */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-[var(--band-h,var(--hero-img-h))] lg:top-0 lg:h-auto"
+            style={band ? ({ "--band-h": `${band.h}px` } as CSSProperties) : undefined}
+          >
+            {/* Already optimised: the props come from next/image's getImageProps. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              {...mobileBg}
+              {...bgImg}
               alt=""
               loading="eager"
               fetchPriority={current === 0 ? "high" : "auto"}
-              className="object-cover object-[var(--hero-pos-m)] sm:object-[var(--hero-pos)] xl:object-contain xl:object-[right_bottom] laptop:xl:[mask-image:var(--hero-edge)]"
+              className="object-cover object-[var(--hero-pos-m)] lg:object-[var(--hero-pos)] xl:object-contain xl:object-[right_bottom] xl:[mask-image:var(--hero-edge)]"
               style={
                 {
-                  ...mobileBg.style,
+                  ...bgImg.style,
                   "--hero-pos": slide.objectPos,
-                  "--hero-pos-m": MOBILE_BG_POS,
+                  "--hero-pos-m": band ? band.pos : slide.mobilePos,
                   "--hero-edge": HERO_EDGE_MASK,
-                } as React.CSSProperties
+                } as CSSProperties
               }
             />
-          </picture>
-          {/* Left-to-right gradient: solid on left for text, clears on right so face is visible */}
-          <div
-            className="absolute inset-0 hidden sm:block"
-            style={{
-              background:
-                "linear-gradient(to right, #0C2D5A 28%, rgba(12,45,90,0.80) 43%, rgba(12,45,90,0.15) 61%, transparent 78%)",
-            }}
-          />
-          {/* Phones: text covers the full width, so a top-to-bottom navy gradient — strongest
-              behind the heading and paragraph, easing off where the site and helmet show between
-              the buttons, then settling again at the foot behind the slider controls. A deep navy
-              (#112F59) gradient from the left fades to clear towards the right, and a soft
-              brand-blue glow lifts the top. */}
-          <div
-            className="absolute inset-0 sm:hidden"
-            style={{
-              background:
-                "radial-gradient(120% 40% at 92% 0%, rgba(24,95,165,0.3) 0%, rgba(24,95,165,0) 70%), linear-gradient(to right, rgba(17,47,89,0.6) 0%, rgba(17,47,89,0.38) 25%, rgba(17,47,89,0.14) 48%, rgba(17,47,89,0) 68%),linear-gradient(to bottom, rgba(12,45,90,0.9) 0%, rgba(12,45,90,0.86) 25%, rgba(12,45,90,0.76) 45%, rgba(12,45,90,0.6) 62%, rgba(12,45,90,0.5) 74%, rgba(12,45,90,0.62) 88%, rgba(12,45,90,0.82) 100%)",
-            }}
-          />
+            {/* Left-to-right gradient: solid on left for text, clears on right so face is visible */}
+            <div
+              className="absolute inset-0 hidden lg:block"
+              style={{
+                background:
+                  "linear-gradient(to right, #0C2D5A 28%, rgba(12,45,90,0.80) 43%, rgba(12,45,90,0.15) 61%, transparent 78%)",
+              }}
+            />
+            {/* Phones and tablets: the same gradient turned vertical (navy from the text area fading down
+                into the photo, masked clear around the face), plus a light navy foot. */}
+            <div className="absolute inset-0 lg:hidden" style={{ background: MOBILE_BASE }} />
+            <div
+              className="absolute inset-0 lg:hidden"
+              style={{
+                top: -2,
+                background: MOBILE_BLEND,
+                maskImage: faceMask,
+                WebkitMaskImage: faceMask,
+              }}
+            />
+          </div>
         </motion.div>
       </AnimatePresence>
 
       {/* Main content — text on left, photo shows through on right */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="min-h-[90vh] lg:min-h-0 py-12 sm:py-20 lg:py-12 laptop:py-8 laptop-short:py-6 flex flex-col justify-center">
+        <div className="pt-8 sm:pt-14 pb-[calc(var(--hero-img-h)+76px)] lg:pt-16 lg:pb-12 laptop:pt-10 laptop:pb-8 laptop-short:pt-8 laptop-short:pb-6 flex flex-col justify-center">
 
           {/* Text block — constrained to left half on large screens */}
-          <div className="max-w-xl lg:max-w-[600px]">
+          <div ref={textRef} className="relative max-w-xl lg:max-w-[600px]">
             {/* All slides share one grid cell: invisible copies reserve the tallest slide's
                 height, so the hero, buttons and controls never move between slides. On desktop the
                 visible slide is centred in that space, so shorter slides leave no gap below. */}
@@ -310,6 +432,9 @@ export default function HeroSlider() {
               {SLIDES.map((s) => (
                 <div
                   key={`sizer-${s.id}`}
+                  ref={(el) => {
+                    sizerRefs.current[s.id] = el;
+                  }}
                   className="invisible flex flex-col [grid-area:1/1]"
                   aria-hidden="true"
                 >
@@ -333,7 +458,12 @@ export default function HeroSlider() {
             </div>
 
             {/* Slide controls */}
-            <div className="flex items-center gap-4 mt-12 lg:mt-8 laptop:mt-6 laptop-short:mt-5">
+            {/* Phones and tablets: placed just under the current slide's text (the photo band
+                starts below). */}
+            <div
+              className="flex items-center gap-4 max-lg:absolute max-lg:inset-x-0 max-lg:top-[var(--ctrl-top,auto)] mt-8 laptop:mt-6 laptop-short:mt-5"
+              style={band ? ({ "--ctrl-top": `${band.ctrlTop}px` } as CSSProperties) : undefined}
+            >
               <div className="flex items-center gap-2">
                 {SLIDES.map((_, i) => (
                   <button
