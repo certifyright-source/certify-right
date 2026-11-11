@@ -75,7 +75,7 @@ export default function AboutPage() {
           src="/images/about-seated.webp"
           position="60% center"
           mobilePosition="80% center"
-          mobileFace="58% 30%"
+          mobileFadeEnd="19%"
           preload
         />
         {/* Content — matches homepage hero container/alignment pattern */}

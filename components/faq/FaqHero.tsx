@@ -14,7 +14,7 @@ export default function FaqHero() {
         src="/images/faq-slide-3.webp"
         position="45% center"
         mobilePosition="70% center"
-        mobileFace="27% 29%"
+        mobileFadeEnd="17%"
         preload
       />
 
