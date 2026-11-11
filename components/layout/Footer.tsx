@@ -6,6 +6,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { SOCIAL_LINKS } from "@/data/social";
 import { services } from "@/data/services";
 import CRLogo from "@/components/ui/CRLogo";
 
@@ -44,7 +45,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://facebook.com"
+                href={SOCIAL_LINKS.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -53,7 +54,7 @@ export default function Footer() {
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a
-                href="https://instagram.com/certifyright"
+                href={SOCIAL_LINKS.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -62,7 +63,7 @@ export default function Footer() {
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a
-                href="https://linkedin.com/company/certifyright"
+                href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"

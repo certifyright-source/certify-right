@@ -13,6 +13,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { services } from "@/data/services";
 import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { SOCIAL_LINKS } from "@/data/social";
 import CRLogo from "@/components/ui/CRLogo";
 
 const navLinks = [
@@ -114,7 +115,7 @@ export default function Header() {
                 </a>
                 <div className="flex items-center gap-2.5">
                   <a
-                    href="https://facebook.com"
+                    href={SOCIAL_LINKS.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook"
@@ -123,7 +124,7 @@ export default function Header() {
                     <FacebookIcon className="w-3.5 h-3.5" />
                   </a>
                   <a
-                    href="https://instagram.com/certifyright"
+                    href={SOCIAL_LINKS.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
@@ -132,7 +133,7 @@ export default function Header() {
                     <InstagramIcon className="w-3.5 h-3.5" />
                   </a>
                   <a
-                    href="https://linkedin.com/company/certifyright"
+                    href={SOCIAL_LINKS.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
