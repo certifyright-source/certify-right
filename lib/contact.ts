@@ -17,9 +17,16 @@ export const SERVICE_OPTIONS = [
   { value: "not-sure", label: "Not Sure — Happy to Discuss" },
 ];
 
-// Vercel rejects function request bodies over 4.5MB, so attachments are capped at 4MB.
-export const MAX_FILE_SIZE = 4 * 1024 * 1024;
-export const MAX_FILE_SIZE_LABEL = "4MB";
+// Largest PDF the form accepts.
+export const MAX_FILE_SIZE = 12 * 1024 * 1024;
+export const MAX_FILE_SIZE_LABEL = "12MB";
+
+// Vercel rejects function request bodies over 4.5MB. PDFs up to this size are posted with the
+// form as before; larger ones are uploaded from the browser straight to private Vercel Blob
+// storage (via /api/contact/upload), and the form posts only the blob's URL.
+export const DIRECT_UPLOAD_LIMIT = 4 * 1024 * 1024;
+// Blob pathname prefix for contact-form uploads. Blobs are deleted once the email is sent.
+export const BLOB_UPLOAD_PREFIX = "contact-uploads/";
 
 export const FIELD_LIMITS = {
   fullName: 100,

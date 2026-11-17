@@ -1,5 +1,7 @@
 import { Resend } from "resend";
+import { del, get } from "@vercel/blob";
 import {
+  BLOB_UPLOAD_PREFIX,
   MAX_FILE_SIZE,
   MAX_FILE_SIZE_LABEL,
   getServiceLabel,
@@ -25,6 +27,46 @@ function escapeHtml(s: string) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+// Reads a PDF the browser uploaded to private Vercel Blob storage, then deletes the blob (the
+// email carries the copy). Only blobs under the contact-upload prefix are accepted, and reading
+// stops past MAX_FILE_SIZE. Returns null if the blob can't be read.
+async function readUploadedBlob(url: string) {
+  let pathname: string;
+  try {
+    pathname = decodeURIComponent(new URL(url).pathname).replace(/^\//, "");
+  } catch {
+    return null;
+  }
+  if (!pathname.startsWith(BLOB_UPLOAD_PREFIX)) return null;
+
+  try {
+    const result = await get(url, { access: "private", useCache: false });
+    if (!result || result.statusCode !== 200) return null;
+    const chunks: Uint8Array[] = [];
+    let size = 0;
+    const reader = result.stream.getReader();
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > MAX_FILE_SIZE) {
+        await reader.cancel();
+        break;
+      }
+      chunks.push(value);
+    }
+    const name = pathname.slice(BLOB_UPLOAD_PREFIX.length).replace(/-[A-Za-z0-9]+(\.pdf)$/i, "$1");
+    return { name, size, content: Buffer.concat(chunks) };
+  } catch (err) {
+    console.error("[contact] Reading uploaded file failed:", err instanceof Error ? err.message : err);
+    return null;
+  } finally {
+    await del(url).catch((err) =>
+      console.error("[contact] Deleting uploaded file failed:", err instanceof Error ? err.message : err)
+    );
+  }
 }
 
 // Returns null (and names only the missing variables) when Resend isn't configured.
@@ -58,23 +100,38 @@ export async function POST(request: Request) {
   };
   const errors: ContactErrors = validateContactFields(fields);
 
+  // The PDF arrives either with the form (up to DIRECT_UPLOAD_LIMIT) or, when larger, as the URL
+  // of a private Vercel Blob the browser uploaded it to. Both get the same checks.
   const upload = form.get("file");
-  let attachment: { filename: string; content: Buffer; contentType: string } | null = null;
+  const fileUrl = field(form, "fileUrl");
+  let pdf: { name: string; size: number; content: Buffer } | null = null;
   if (upload instanceof File && upload.size > 0) {
-    if (upload.size > MAX_FILE_SIZE) {
-      errors.file = `File must be under ${MAX_FILE_SIZE_LABEL}.`;
+    pdf =
+      upload.size > MAX_FILE_SIZE
+        ? { name: upload.name, size: upload.size, content: Buffer.alloc(0) }
+        : { name: upload.name, size: upload.size, content: Buffer.from(await upload.arrayBuffer()) };
+  } else if (fileUrl) {
+    const blob = await readUploadedBlob(fileUrl);
+    if (!blob) {
+      errors.file = "We couldn't read your file. Please try uploading it again.";
     } else {
-      const content = Buffer.from(await upload.arrayBuffer());
+      pdf = { name: field(form, "fileName") || blob.name, size: blob.size, content: blob.content };
+    }
+  }
+
+  let attachment: { filename: string; content: Buffer; contentType: string } | null = null;
+  if (pdf) {
+    if (pdf.size > MAX_FILE_SIZE) {
+      errors.file = `File must be under ${MAX_FILE_SIZE_LABEL}.`;
+    } else if (!isPdfName(pdf.name) || pdf.content.subarray(0, 5).toString("latin1") !== "%PDF-") {
       // Check the PDF signature, not just the extension.
-      if (!isPdfName(upload.name) || content.subarray(0, 5).toString("latin1") !== "%PDF-") {
-        errors.file = "Please upload a PDF file.";
-      } else {
-        attachment = {
-          filename: upload.name.replace(/[\r\n"]/g, "_"),
-          content,
-          contentType: "application/pdf",
-        };
-      }
+      errors.file = "Please upload a PDF file.";
+    } else {
+      attachment = {
+        filename: pdf.name.replace(/[\r\n"]/g, "_"),
+        content: pdf.content,
+        contentType: "application/pdf",
+      };
     }
   }
 
