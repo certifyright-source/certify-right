@@ -3,6 +3,8 @@
 import { useState, useRef } from "react";
 import { ArrowRight, Upload, X, CheckCircle2, AlertCircle } from "lucide-react";
 import {
+  BLOB_UPLOAD_PREFIX,
+  DIRECT_UPLOAD_LIMIT,
   MAX_FILE_SIZE,
   MAX_FILE_SIZE_LABEL,
   SERVICE_OPTIONS,
@@ -97,9 +99,25 @@ export default function ContactForm() {
     body.append("service", formData.service);
     body.append("propertyAddress", formData.propertyAddress);
     body.append("description", formData.description);
-    if (formData.file) body.append("file", formData.file);
 
     try {
+      const file = formData.file;
+      if (file && file.size > DIRECT_UPLOAD_LIMIT) {
+        // Too large to post with the form on Vercel: upload it straight to private Blob
+        // storage first, then send its URL.
+        const { upload } = await import("@vercel/blob/client");
+        const safeName = file.name.replace(/[^\w.-]+/g, "_");
+        const blob = await upload(`${BLOB_UPLOAD_PREFIX}${safeName}`, file, {
+          access: "private",
+          handleUploadUrl: "/api/contact/upload",
+          contentType: "application/pdf",
+        });
+        body.append("fileUrl", blob.url);
+        body.append("fileName", file.name);
+      } else if (file) {
+        body.append("file", file);
+      }
+
       const res = await fetch("/api/contact", { method: "POST", body });
       if (res.ok) {
         setStatus("success");
