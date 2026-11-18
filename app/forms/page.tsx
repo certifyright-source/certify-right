@@ -7,7 +7,7 @@ import FormCards, { type DownloadableForm } from "@/components/forms/FormCards";
 export const metadata: Metadata = {
   title: "Forms & Documents",
   description:
-    "Download Certify Right forms: Appointment of Principal Certifier & Notice of Commencement, and Application for Occupation Certificate. Free PDF downloads.",
+    "Download Certify Right forms: Application Form & Contract for Certification Work, Appointment of Principal Certifier & Notice of Commencement, and Application for Occupation Certificate. Free PDF downloads.",
   alternates: { canonical: "https://certifyright.com.au/forms" },
 };
 
@@ -33,6 +33,17 @@ const forms: DownloadableForm[] = [
     preview: "/images/form-occupation-certificate-preview.webp",
     pages: 4,
     size: "735 KB",
+  },
+  {
+    title: "Application Form & Contract for Certification Work",
+    description:
+      "One combined document with the application for certification work, the certification work contract, our fee proposal and the terms and conditions. Complete and sign it to engage Certify Right.",
+    stage: "To engage Certify Right",
+    href: "/downloads/forms/application-and-contract-form.pdf",
+    fileName: "Application Form and Contract Form Combined_Feb 2026.pdf",
+    preview: "/images/form-application-contract-preview.webp",
+    pages: 19,
+    size: "1.8 MB",
   },
 ];
 
@@ -87,8 +98,9 @@ export default function FormsPage() {
                 Forms & Documents
               </h1>
               <p className="text-blue-100 text-base leading-[1.65] sm:text-xl sm:leading-relaxed mb-7 sm:mb-8">
-                Download the forms you need to appoint your Principal Certifier and apply for
-                your Occupation Certificate — ready to complete, sign and send back to us.
+                Download the forms you need to engage Certify Right, appoint your Principal
+                Certifier and apply for your Occupation Certificate — ready to complete, sign and
+                send back to us.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
@@ -110,6 +122,16 @@ export default function FormsPage() {
 
             {/* Fanned document covers */}
             <div className="hidden lg:block relative h-[400px]" aria-hidden="true">
+              <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[210px] rotate-[-1deg] rounded-lg overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] ring-1 ring-white/10">
+                <Image
+                  src={forms[2].preview}
+                  alt=""
+                  width={900}
+                  height={1273}
+                  sizes="210px"
+                  className="w-full h-auto"
+                />
+              </div>
               <div className="absolute z-10 left-[4%] top-12 w-[230px] -rotate-6 rounded-lg overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] ring-1 ring-white/10">
                 <Image
                   src={forms[0].preview}
@@ -132,7 +154,7 @@ export default function FormsPage() {
               </div>
               <div className="absolute z-20 left-1/2 bottom-0 -translate-x-1/2 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#0C2D5A] shadow-xl whitespace-nowrap">
                 <FileCheck2 className="w-4 h-4 text-[#185FA5]" />
-                2 forms · Free PDF downloads
+                {forms.length} forms · Free PDF downloads
               </div>
             </div>
           </div>
