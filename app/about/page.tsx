@@ -90,9 +90,9 @@ export default function AboutPage() {
                 Fadi Habbouche
               </h1>
               <p className="text-blue-100 text-base leading-[1.65] sm:text-xl sm:leading-relaxed">
-                Registered Building Surveyor (Class A3). Civil/Design Engineer. Council
-                Compliance Officer. Fire Safety Professional. 15+ years of experience — and
-                the person you speak to directly.
+                Fadi Habbouche is a Registered Building Surveyor (Class A3, Class 1-10),
+                Civil/Design Engineer, and former Council Building Development and Fire
+                Compliance Officer/Consultant
               </p>
             </div>
           </div>
