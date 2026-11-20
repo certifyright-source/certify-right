@@ -5,7 +5,7 @@ const trustPoints = [
   "Registered Building Surveyor (Class A3)",
   "Civil/Design Engineer",
   "Council Compliance Officer",
-  "Qualified Fire Safety Professional",
+  "Fire Compliance Officer/Consultant",
   "15+ years of industry experience",
   "NSW Planning Portal expertise",
   "Practical, solution-focused advice",

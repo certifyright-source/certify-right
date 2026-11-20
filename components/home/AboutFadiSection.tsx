@@ -7,7 +7,7 @@ const expertise = [
   { label: "Building Surveying", desc: "Registered Building Surveyor Class A3 (BDC2868) — NSW Fair Trading." },
   { label: "NSW Planning Portal", desc: "Daily work with CDC and DA lodgements, requests and referrals." },
   { label: "Council Compliance", desc: "Former council compliance officer — knows the process from both sides." },
-  { label: "Fire Safety", desc: "Qualified fire safety professional — AFSS, schedules and assessments." },
+  { label: "Fire Safety", desc: "Fire Compliance Officer/Consultant — AFSS, schedules and assessments." },
   { label: "Private Certification", desc: "15+ years of industry experience across residential and commercial projects." },
 ];
 
@@ -37,13 +37,9 @@ export default function AboutFadiSection() {
             </h2>
             <div className="space-y-4 text-slate-600 leading-relaxed mb-8">
               <p>
-                Fadi Habbouche is a Registered Building Surveyor (Class A3), Civil/Design
-                Engineer, former Council Compliance Officer and qualified Fire Safety
-                Professional.
-              </p>
-              <p>
-                With 15+ years of industry experience, Fadi gives practical, plain-English
-                advice, responds promptly and focuses on moving your project forward.
+                Fadi Habbouche is a Registered Building Surveyor (Class A3, Class 1-10),
+                Civil/Design Engineer, and former Council Building Development and Fire
+                Compliance Officer/Consultant
               </p>
             </div>
 
