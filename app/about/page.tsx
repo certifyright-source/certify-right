@@ -13,7 +13,7 @@ import PageHeroBackground from "@/components/layout/PageHeroBackground";
 export const metadata: Metadata = {
   title: "About Fadi Habbouche — NSW Registered Building Surveyor",
   description:
-    "Fadi Habbouche is a Registered Building Surveyor (Class A3, BDC2868), Civil/Design Engineer, former Council Compliance Officer and qualified Fire Safety Professional — helping clients navigate planning, certification, compliance and approvals across NSW.",
+    "Fadi Habbouche is a Registered Building Surveyor (Class A3, BDC2868), Civil/Design Engineer, former Council Compliance Officer and Fire Compliance Officer/Consultant — helping clients navigate planning, certification, compliance and approvals across NSW.",
   alternates: { canonical: "https://certifyright.com.au/about" },
 };
 
@@ -32,7 +32,7 @@ const expertise = [
   },
   {
     label: "Fire Safety",
-    desc: "Qualified Fire Safety Professional. AFSS, Fire Safety Schedules, essential fire safety measures and compliance reviews.",
+    desc: "Fire Compliance Officer/Consultant. AFSS, Fire Safety Schedules, essential fire safety measures and compliance reviews.",
   },
   {
     label: "NSW Planning Portal",
@@ -122,7 +122,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   Fadi is a Registered Building Surveyor (Class A3), Civil/Design Engineer,
-                  former Council Compliance Officer and qualified Fire Safety Professional, with
+                  former Council Compliance Officer and Fire Compliance Officer/Consultant, with
                   15+ years of industry experience.
                 </p>
                 <p>
